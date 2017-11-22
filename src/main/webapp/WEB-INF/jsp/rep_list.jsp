@@ -16,18 +16,21 @@
 					<thead>
 						<tr>
 							<th  width="10%">编号</th>
-							<th  width="25%">姓名</th>
-							<th  width="25%">年龄</th>
-							<th  width="25%">密码</th>
+							<th  width="25%">名称</th>
+							<th  width="25%">是否缓存</th>
+							<th  width="25%">更新时间</th>
+							<th  width="25%">操作</th>
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${pageInfo.list}" var="user">
+					<c:forEach items="${pageInfo.list}" var="rep">
 						<tr>
-						   <td>${user.id }</td>
-						   <td>${user.userName }</td>
-						   <td>${user.age }</td>
-						   <td>${user.password }</td>
+						   <td>${rep.repId }</td>
+						   <td>${rep.repName }</td>
+						   <td>${rep.isCache }</td>
+						   <td>${rep.updateTime }</td>
+						   <td>${rep.repId }</td>
+						   
 						   
 						</tr>
 					</c:forEach>	

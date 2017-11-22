@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dwl.rep.dao.ReportInfoMapper">
+  <resultMap id="BaseResultMap" type="com.dwl.rep.pojo.ReportInfo">
+    <id column="rep_id" jdbcType="VARCHAR" property="repId" />
+    <result column="rep_name" jdbcType="VARCHAR" property="repName" />
+    <result column="row_sum" jdbcType="VARCHAR" property="rowSum" />
+    <result column="col_sum" jdbcType="VARCHAR" property="colSum" />
+    <result column="is_cache" jdbcType="VARCHAR" property="isCache" />
+    <result column="corn_time" jdbcType="VARCHAR" property="cornTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.dwl.rep.pojo.ReportInfo">
+    <result column="templet" jdbcType="LONGVARCHAR" property="templet" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rep_id, rep_name, row_sum, col_sum, is_cache, corn_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    templet
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from report_info
+    where rep_id = #{repId,jdbcType=VARCHAR}
+  </select>
+  <select id="getInfoList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report_info
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from report_info
+    where rep_id = #{repId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dwl.rep.pojo.ReportInfo">
+    insert into report_info (rep_id, rep_name, row_sum, 
+      col_sum, is_cache, corn_time, 
+      update_time, templet)
+    values (#{repId,jdbcType=VARCHAR}, #{repName,jdbcType=VARCHAR}, #{rowSum,jdbcType=VARCHAR}, 
+      #{colSum,jdbcType=VARCHAR}, #{isCache,jdbcType=VARCHAR}, #{cornTime,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{templet,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dwl.rep.pojo.ReportInfo">
+    insert into report_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="repId != null">
+        rep_id,
+      </if>
+      <if test="repName != null">
+        rep_name,
+      </if>
+      <if test="rowSum != null">
+        row_sum,
+      </if>
+      <if test="colSum != null">
+        col_sum,
+      </if>
+      <if test="isCache != null">
+        is_cache,
+      </if>
+      <if test="cornTime != null">
+        corn_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="templet != null">
+        templet,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="repId != null">
+        #{repId,jdbcType=VARCHAR},
+      </if>
+      <if test="repName != null">
+        #{repName,jdbcType=VARCHAR},
+      </if>
+      <if test="rowSum != null">
+        #{rowSum,jdbcType=VARCHAR},
+      </if>
+      <if test="colSum != null">
+        #{colSum,jdbcType=VARCHAR},
+      </if>
+      <if test="isCache != null">
+        #{isCache,jdbcType=VARCHAR},
+      </if>
+      <if test="cornTime != null">
+        #{cornTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templet != null">
+        #{templet,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dwl.rep.pojo.ReportInfo">
+    update report_info
+    <set>
+      <if test="repName != null">
+        rep_name = #{repName,jdbcType=VARCHAR},
+      </if>
+      <if test="rowSum != null">
+        row_sum = #{rowSum,jdbcType=VARCHAR},
+      </if>
+      <if test="colSum != null">
+        col_sum = #{colSum,jdbcType=VARCHAR},
+      </if>
+      <if test="isCache != null">
+        is_cache = #{isCache,jdbcType=VARCHAR},
+      </if>
+      <if test="cornTime != null">
+        corn_time = #{cornTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="templet != null">
+        templet = #{templet,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where rep_id = #{repId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dwl.rep.pojo.ReportInfo">
+    update report_info
+    set rep_name = #{repName,jdbcType=VARCHAR},
+      row_sum = #{rowSum,jdbcType=VARCHAR},
+      col_sum = #{colSum,jdbcType=VARCHAR},
+      is_cache = #{isCache,jdbcType=VARCHAR},
+      corn_time = #{cornTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      templet = #{templet,jdbcType=LONGVARCHAR}
+    where rep_id = #{repId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dwl.rep.pojo.ReportInfo">
+    update report_info
+    set rep_name = #{repName,jdbcType=VARCHAR},
+      row_sum = #{rowSum,jdbcType=VARCHAR},
+      col_sum = #{colSum,jdbcType=VARCHAR},
+      is_cache = #{isCache,jdbcType=VARCHAR},
+      corn_time = #{cornTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where rep_id = #{repId,jdbcType=VARCHAR}
+  </update>
+</mapper>
