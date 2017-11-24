@@ -1,6 +1,5 @@
 package com.dwl.rep.common;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -374,7 +373,7 @@ public class Strings {
      */
     public static String[] splitIgnoreBlank(String s, String regex) {
         if (null == s)
-            return null;
+            return new String[0];//返回空数组
         String[] ss = s.split(regex);
         List<String> list = new LinkedList<String>();
         for (String st : ss) {
