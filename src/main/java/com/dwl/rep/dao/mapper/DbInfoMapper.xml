@@ -20,6 +20,11 @@
     from db_info
     where id = #{id,jdbcType=VARCHAR}
   </select>
+   <select id="getInfoList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from db_info
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from db_info
     where id = #{id,jdbcType=VARCHAR}

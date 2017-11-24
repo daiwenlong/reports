@@ -1,5 +1,7 @@
 package com.dwl.rep.dao;
 
+import java.util.List;
+
 import com.dwl.rep.pojo.DbInfo;
 
 public interface DbInfoMapper {
@@ -14,4 +16,6 @@ public interface DbInfoMapper {
     int updateByPrimaryKeySelective(DbInfo record);
 
     int updateByPrimaryKey(DbInfo record);
+    
+    List<DbInfo> getInfoList();
 }
