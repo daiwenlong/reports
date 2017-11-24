@@ -5,9 +5,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.log4j.Logger;
 
 import com.dwl.rep.pojo.DbInfo;
 
@@ -25,6 +24,8 @@ public class DbUtil {
 	private static DbUtil dbUtil= null;
 	
 	private static Map<String, BasicDataSource> dbMap = new HashMap<>();
+	
+	private static Logger logger = Logger.getLogger(DbUtil.class);
 	
 	/**
 	 * 获取单例
@@ -71,6 +72,7 @@ public class DbUtil {
 	 * @return
 	 */
 	public BasicDataSource createDataSource(DbInfo dbInfo){
+		logger.info("创建数据源："+dbInfo.getDbName());
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(dbInfo.getDbType());
 		dataSource.setUrl(dbInfo.getDbAddress());
@@ -95,6 +97,7 @@ public class DbUtil {
 	        dataSource.setMaxIdle(100);
 	        dataSource.setMaxWait(1000);
 		}
+		logger.info(dbInfo.getDbName()+" - 创建成功");
 		return dataSource;
 		
 	}
@@ -114,7 +117,7 @@ public class DbUtil {
 			}
 		}
 		dbMap.remove(dbInfo.getId());
-		
+		logger.info(dbInfo.getDbName()+" - 移除成功");
 	}
 	
 
