@@ -3,9 +3,12 @@
 <%@ include file="/common/setting.jsp"%>
 <html>
 <link rel="stylesheet" type="text/css" href="${ctx}/reports/tiles/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/reports/tiles/ace/css/ace.min.css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/reports/tiles/ace/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/reports/skins/css/reports.css" />
 <script type="text/javascript" src="${ctx}/reports/tiles/js/jquery-2.2.3.min.js"></script>
 <body>
+<jsp:include page="/common/header.jsp"/>
 <div class="container">
 <div class="col-md-12">
 <div class="content">
