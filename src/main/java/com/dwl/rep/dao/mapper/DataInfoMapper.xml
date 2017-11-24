@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dwl.rep.dao.DataInfoMapper">
+  <resultMap id="BaseResultMap" type="com.dwl.rep.pojo.DataInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="db_id" jdbcType="VARCHAR" property="dbId" />
+    <result column="data_name" jdbcType="VARCHAR" property="dataName" />
+    <result column="sql" jdbcType="VARCHAR" property="sql" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, db_id, data_name, sql, result, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from data_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from data_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dwl.rep.pojo.DataInfo">
+    insert into data_info (id, db_id, data_name, 
+      sql, result, update_time
+      )
+    values (#{id,jdbcType=VARCHAR}, #{dbId,jdbcType=VARCHAR}, #{dataName,jdbcType=VARCHAR}, 
+      #{sql,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dwl.rep.pojo.DataInfo">
+    insert into data_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dbId != null">
+        db_id,
+      </if>
+      <if test="dataName != null">
+        data_name,
+      </if>
+      <if test="sql != null">
+        sql,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dbId != null">
+        #{dbId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataName != null">
+        #{dataName,jdbcType=VARCHAR},
+      </if>
+      <if test="sql != null">
+        #{sql,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dwl.rep.pojo.DataInfo">
+    update data_info
+    <set>
+      <if test="dbId != null">
+        db_id = #{dbId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataName != null">
+        data_name = #{dataName,jdbcType=VARCHAR},
+      </if>
+      <if test="sql != null">
+        sql = #{sql,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dwl.rep.pojo.DataInfo">
+    update data_info
+    set db_id = #{dbId,jdbcType=VARCHAR},
+      data_name = #{dataName,jdbcType=VARCHAR},
+      sql = #{sql,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
