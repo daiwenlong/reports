@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dwl.rep.common.ConUtils;
+import com.dwl.rep.common.Strings;
 import com.dwl.rep.pojo.DbInfo;
 import com.dwl.rep.service.DbService;
 import com.github.pagehelper.Page;
@@ -31,8 +32,28 @@ public class DbController {
 		dbService.getInfoList();
 		PageInfo<DbInfo> pageInfo = page.toPageInfo();
 		model.addAttribute("pageInfo",pageInfo);
-		return "db/dbinfo_list";
+		return "db/info_list";
 		
+	}
+	
+	@RequestMapping("/toDbEdit")
+	public String toDbEdit(String dbId,Model model){
+		DbInfo dbInfo = null;
+		if(!Strings.isEmpty(dbId)){
+			dbInfo = dbService.getInfoById(dbId);
+		}
+		model.addAttribute("dbInfo", dbInfo);
+		return "db/info_edit";
+	}
+	
+	@RequestMapping("/toDbSave")
+	public String addOrEdit(DbInfo dbInfo){
+		if(Strings.isEmpty(dbInfo.getId())){
+			dbService.saveDbInfo(dbInfo);
+		}else{
+			dbService.updateDbInfo(dbInfo);
+		}
+		return "redirect:/db/getInfoList";	
 	}
 
 }
