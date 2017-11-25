@@ -10,6 +10,16 @@
 <body>
 <jsp:include page="/common/header.jsp"/>
 <div class="container">
+<div class="page-header">
+	<h1>
+		数据源列表
+	</h1>
+</div><!-- /.page-header -->
+<div class="col-md-12">
+<div class="col-md-3" style="float:right" align="right">
+	<a href="${ctx }/db/toDbEdit" class="btn btn-success ">添加</a>
+</div>
+</div>
 <div class="col-md-12">
 <div class="content">
 		<div class="panel-body">
@@ -32,7 +42,7 @@
 						   <td>${db.dbName }</td>
 						   <td>${db.level }</td>
 						   <td>${db.status }</td>
-						   <td>${db.id }</td> 
+						   <td><a href="javascript:void(0);" onclick="edit('${db.id }');">编辑</a></td> 
 						</tr>
 					</c:forEach>	
 					</tbody>
@@ -44,5 +54,10 @@
 	</div>
 </div>
 </div>
+<script type="text/javascript">
+function edit(Id){
+	window.location.href="${ctx}/db/toDbEdit?dbId="+Id;
+}
+</script>
 </body>
 </html>
