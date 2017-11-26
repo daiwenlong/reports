@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/reports/tiles/ace/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/reports/skins/css/reports.css" />
 <script type="text/javascript" src="${ctx}/reports/tiles/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="${ctx}/reports/tiles/js/dic.js"></script>
 <body>
 <jsp:include page="/common/header.jsp"/>
 <div class="container">
@@ -17,6 +18,7 @@
 </div><!-- /.page-header -->
 <div class="col-md-12" style="margin-top:10px">
 	<form class="form-horizontal" role="form" id="dataForm" action="${ctx }/db/toDbSave" method="post">
+	   <input type="hidden" id="id" name="id" class="col-xs-10 col-sm-6" value="${dbInfo.id }"/>
 		<div class="form-group">
 			<label class="col-sm-3 control-label no-padding-right" for="form-field-1">数据源名称</label>
 
@@ -63,10 +65,7 @@
 			<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 使用级别 </label>
 
 			<div class="col-xs-4">
-				<select class="form-control" id="form-field-select-1">
-					<option value="1">一级</option>
-					<option value="2">二级</option>
-					<option value="3">三级</option>
+				<select class="form-control" id="level" name="level">
 				</select>
 			</div>
 		</div>
@@ -84,7 +83,18 @@
 
 </div>
 <script type="text/javascript">
+$(document).ready(function(){
+	$("#level").select({
+		dic:{"1":"一级","2":"二级","3":"三级"},
+		value:'${dbInfo.level}'
+	});
+	
+});
 function save(){
+	if($("#dbName").val()==''){
+		alert("名称不能为空！");
+		return;
+	}
 	$("#dataForm").submit();
 }
 </script>
