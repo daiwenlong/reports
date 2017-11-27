@@ -21,7 +21,7 @@
 					
 				</a>
 
-				<a href="#" class="btn btn-app btn-primary no-radius">
+				<a href="${ctx }/data/getInfoList" class="btn btn-app btn-primary no-radius">
 					<i class="icon-edit bigger-230"></i>
 					数据项
 					

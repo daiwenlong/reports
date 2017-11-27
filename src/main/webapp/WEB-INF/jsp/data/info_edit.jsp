@@ -10,13 +10,26 @@
 <body>
 <jsp:include page="/common/header.jsp"/>
 <div class="container">
-<form name="dataForm" action="${ctx }/db/toDbSave" method="post">
+<div class="page-header">
+	<h1>
+		数据项配置
+	</h1>
+</div><!-- /.page-header -->
+<form name="dataForm" action="${ctx }/data/toDataSave" method="post">
 <div class="col-md-12" style="margin-top:10px">
 	<div class="form-group">
-		<label class="control-label" style="float:left"><h4> 数据源名称：</h4></label>
+		<label class="control-label" style="float:left"><h4> 数据项名称：</h4></label>
 
-		<div class="col-sm-9">
-			<input type="text" id="dbName" placeholder="Username" class="col-xs-10 col-sm-5" />
+		<div class="col-sm-6">
+			<input type="text" id="dataName" name="dataNmae" value="${dataInfo.dataName }" class="col-sm-5" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label" style="float:left"><h4> 数据源：</h4> </label>
+
+		<div class="col-xs-4">
+			<select class="form-control" id="dbId" name="dbId">
+			</select>
 		</div>
 	</div>
 </div>
@@ -24,7 +37,7 @@
 	<div>
 		<label for="form-field-8"><h4>sql:</h4></label>
 	
-		<textarea class="form-control" id="form-field-8" placeholder="sql"></textarea>
+		<textarea class="form-control" id="sql" name="sql" >${dataInfo.sql }</textarea>
 	</div>
 </div>
 </form>
@@ -50,6 +63,12 @@
 function save(){
 	$("#dataForm").submit();
 }
+
+$(document).ready(function(){
+	$.post("${ctx}/data/getDbJson",function(data){
+	});
+});
+
 </script>
 </body>
 </html>
