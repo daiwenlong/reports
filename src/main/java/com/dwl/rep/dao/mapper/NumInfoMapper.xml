@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dwl.rep.dao.NumInfoMapper">
+  <resultMap id="BaseResultMap" type="com.dwl.rep.pojo.NumInfo">
+    <id column="num_id" jdbcType="VARCHAR" property="numId" />
+    <result column="num_pre" jdbcType="VARCHAR" property="numPre" />
+    <result column="num_len" jdbcType="INTEGER" property="numLen" />
+    <result column="num_now" jdbcType="INTEGER" property="numNow" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    num_id, num_pre, num_len, num_now
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from num_info
+    where num_id = #{numId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from num_info
+    where num_id = #{numId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dwl.rep.pojo.NumInfo">
+    insert into num_info (num_id, num_pre, num_len, 
+      num_now)
+    values (#{numId,jdbcType=VARCHAR}, #{numPre,jdbcType=VARCHAR}, #{numLen,jdbcType=INTEGER}, 
+      #{numNow,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dwl.rep.pojo.NumInfo">
+    insert into num_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="numId != null">
+        num_id,
+      </if>
+      <if test="numPre != null">
+        num_pre,
+      </if>
+      <if test="numLen != null">
+        num_len,
+      </if>
+      <if test="numNow != null">
+        num_now,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="numId != null">
+        #{numId,jdbcType=VARCHAR},
+      </if>
+      <if test="numPre != null">
+        #{numPre,jdbcType=VARCHAR},
+      </if>
+      <if test="numLen != null">
+        #{numLen,jdbcType=INTEGER},
+      </if>
+      <if test="numNow != null">
+        #{numNow,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dwl.rep.pojo.NumInfo">
+    update num_info
+    <set>
+      <if test="numPre != null">
+        num_pre = #{numPre,jdbcType=VARCHAR},
+      </if>
+      <if test="numLen != null">
+        num_len = #{numLen,jdbcType=INTEGER},
+      </if>
+      <if test="numNow != null">
+        num_now = #{numNow,jdbcType=INTEGER},
+      </if>
+    </set>
+    where num_id = #{numId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dwl.rep.pojo.NumInfo">
+    update num_info
+    set num_pre = #{numPre,jdbcType=VARCHAR},
+      num_len = #{numLen,jdbcType=INTEGER},
+      num_now = #{numNow,jdbcType=INTEGER}
+    where num_id = #{numId,jdbcType=VARCHAR}
+  </update>
+</mapper>

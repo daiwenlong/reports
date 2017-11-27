@@ -2,29 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dwl.rep.dao.DataInfoMapper">
   <resultMap id="BaseResultMap" type="com.dwl.rep.pojo.DataInfo">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="data_id" jdbcType="VARCHAR" property="id" />
     <result column="db_id" jdbcType="VARCHAR" property="dbId" />
     <result column="data_name" jdbcType="VARCHAR" property="dataName" />
-    <result column="sql" jdbcType="VARCHAR" property="sql" />
+    <result column="data_sql" jdbcType="VARCHAR" property="sql" />
     <result column="result" jdbcType="VARCHAR" property="result" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <association property="dbInfo" javaType="com.dwl.rep.pojo.DbInfo">  
+        <id column="id" jdbcType="VARCHAR" property="id" />
+	    <result column="db_name" jdbcType="VARCHAR" property="dbName" />
+	    <result column="db_type" jdbcType="VARCHAR" property="dbType" />
+	    <result column="db_address" jdbcType="VARCHAR" property="dbAddress" />
+	    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+	    <result column="password" jdbcType="VARCHAR" property="password" />
+	    <result column="level" jdbcType="VARCHAR" property="level" />
+	    <result column="status" jdbcType="VARCHAR" property="status" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    id, db_id, data_name, sql, result, update_time
+    data_id, db_id, data_name, data_sql, result, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from data_info
-    where id = #{id,jdbcType=VARCHAR}
+    where data_id = #{id,jdbcType=VARCHAR}
+  </select>
+   <select id="selectWithDbByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    d.* ,b.* from data_info d,db_info b where d.db_id = b.id and d.data_id = #{id,jdbcType=VARCHAR}
+  </select>
+   <select id="selectInfoList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    d.* ,b.* from data_info d,db_info b where d.db_id = b.id
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from data_info
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.dwl.rep.pojo.DataInfo">
-    insert into data_info (id, db_id, data_name, 
-      sql, result, update_time
+    insert into data_info (data_id, db_id, data_name, 
+      data_sql, result, update_time
       )
     values (#{id,jdbcType=VARCHAR}, #{dbId,jdbcType=VARCHAR}, #{dataName,jdbcType=VARCHAR}, 
       #{sql,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}
@@ -34,7 +52,7 @@
     insert into data_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        id,
+        data_id,
       </if>
       <if test="dbId != null">
         db_id,
@@ -43,7 +61,7 @@
         data_name,
       </if>
       <if test="sql != null">
-        sql,
+        data_sql,
       </if>
       <if test="result != null">
         result,
@@ -83,7 +101,7 @@
         data_name = #{dataName,jdbcType=VARCHAR},
       </if>
       <if test="sql != null">
-        sql = #{sql,jdbcType=VARCHAR},
+        data_sql = #{sql,jdbcType=VARCHAR},
       </if>
       <if test="result != null">
         result = #{result,jdbcType=VARCHAR},
@@ -92,15 +110,15 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=VARCHAR}
+    where data_id = #{id,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dwl.rep.pojo.DataInfo">
     update data_info
     set db_id = #{dbId,jdbcType=VARCHAR},
       data_name = #{dataName,jdbcType=VARCHAR},
-      sql = #{sql,jdbcType=VARCHAR},
+      data_sql = #{sql,jdbcType=VARCHAR},
       result = #{result,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
+    where data_id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
