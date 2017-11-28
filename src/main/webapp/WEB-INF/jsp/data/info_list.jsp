@@ -17,7 +17,7 @@
 </div><!-- /.page-header -->
 <div class="col-md-12">
 <div class="col-md-3" style="float:right" align="right">
-	<a href="${ctx }/db/toDbEdit" class="btn btn-success ">添加</a>
+	<a href="${ctx }/data/toDataEdit" class="btn btn-success ">添加</a>
 </div>
 </div>
 <div class="col-md-12">

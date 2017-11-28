@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/reports/tiles/ace/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/reports/skins/css/reports.css" />
 <script type="text/javascript" src="${ctx}/reports/tiles/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="${ctx}/reports/tiles/js/dic.js"></script>
 <body>
 <jsp:include page="/common/header.jsp"/>
 <div class="container">
@@ -15,13 +16,14 @@
 		数据项配置
 	</h1>
 </div><!-- /.page-header -->
-<form name="dataForm" action="${ctx }/data/toDataSave" method="post">
+<form id="dataForm" name="dataForm" action="${ctx }/data/toDataSave" method="post">
+<input type="hidden" id="id" name="id" value="${dataInfo.id }">
 <div class="col-md-12" style="margin-top:10px">
 	<div class="form-group">
 		<label class="control-label" style="float:left"><h4> 数据项名称：</h4></label>
 
 		<div class="col-sm-6">
-			<input type="text" id="dataName" name="dataNmae" value="${dataInfo.dataName }" class="col-sm-5" />
+			<input type="text" id="dataName" name="dataName" value="${dataInfo.dataName }" class="col-sm-5" />
 		</div>
 	</div>
 	<div class="form-group">
@@ -52,7 +54,7 @@
 	<button data-toggle="dropdown" class="btn btn-warning dropdown-toggle" onclick="save();">
 		保存
 	</button>
-	<button data-toggle="dropdown" class="btn btn-warning dropdown-toggle" onclick="">
+	<button data-toggle="dropdown" class="btn btn-warning dropdown-toggle" onclick="history.go(-1);">
 		返回
 	</button>
 </div>
@@ -61,11 +63,17 @@
 </div>
 <script type="text/javascript">
 function save(){
+	if($("#dataName").val()==''){
+		alert("名称不能为空");
+		return;
+	}
 	$("#dataForm").submit();
 }
 
 $(document).ready(function(){
-	$.post("${ctx}/data/getDbJson",function(data){
+	$("#dbId").ajaxselect({
+		url:"${ctx}/data/getDbJson",
+		value:'${dataInfo.dbId}'
 	});
 });
 
