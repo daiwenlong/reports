@@ -15,9 +15,25 @@ $.fn.select = function(options) {
     }
     for(key in dic){
         if(key == options.value){
-             this.append("<option value='"+key+"' selected>"+dic[key]+"</option>");
+        	select.append("<option value='"+key+"' selected>"+dic[key]+"</option>");
         }else{
-            this.append("<option value='"+key+"'>"+dic[key]+"</option>");
+        	select.append("<option value='"+key+"'>"+dic[key]+"</option>");
         }
     }
-}
+};
+
+$.fn.ajaxselect = function(options) {
+	var select = this;
+	$.get(options.url,function(result){
+		if(options.initvalue!=null&&options.initvalue!=''){
+	        this.append("<option>"+options.initvalue+"</option>");  
+	    }
+	    for(key in result){
+	        if(key == options.value){
+	        	 select.append("<option value='"+key+"' selected>"+result[key]+"</option>");
+	        }else{
+	            select.append("<option value='"+key+"'>"+result[key]+"</option>");
+	        }
+	    }
+	});
+};
