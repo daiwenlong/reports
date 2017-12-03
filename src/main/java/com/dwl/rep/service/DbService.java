@@ -26,8 +26,6 @@ public class DbService {
 	}
 	
 	public int saveDbInfo(DbInfo dnInfo){
-		if(Strings.isEmpty(dnInfo.getId()))
-			dnInfo.setId(UUID.randomUUID().toString());
 		return dbInfoMapper.insert(dnInfo);
 	}
 	

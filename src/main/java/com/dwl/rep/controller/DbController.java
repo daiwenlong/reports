@@ -11,6 +11,7 @@ import com.dwl.rep.common.ConUtils;
 import com.dwl.rep.common.Strings;
 import com.dwl.rep.pojo.DbInfo;
 import com.dwl.rep.service.DbService;
+import com.dwl.rep.service.NumService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
@@ -25,6 +26,9 @@ public class DbController {
 	
 	@Resource
 	private DbService dbService;
+	
+	@Resource
+	private NumService numService;
 	
 	@RequestMapping("/getInfoList")
 	public String getInfoList(Model model,HttpServletRequest request){
@@ -49,6 +53,7 @@ public class DbController {
 	@RequestMapping("/toDbSave")
 	public String addOrEdit(DbInfo dbInfo){
 		if(Strings.isEmpty(dbInfo.getId())){
+			dbInfo.setId(numService.getNum("DB"));
 			dbService.saveDbInfo(dbInfo);
 		}else{
 			dbService.updateDbInfo(dbInfo);
