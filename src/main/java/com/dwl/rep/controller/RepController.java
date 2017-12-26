@@ -27,7 +27,7 @@ public class RepController {
 		this.repService.getRepList();
 		PageInfo<ReportInfo> pageInfo = page.toPageInfo();
 		model.addAttribute("pageInfo", pageInfo);
-		return "rep_list";
+		return "rep/rep_list";
 		
 	}
 
