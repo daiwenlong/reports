@@ -32,5 +32,22 @@ public class DbService {
 	public int updateDbInfo(DbInfo dbInfo){
 		return dbInfoMapper.updateByPrimaryKey(dbInfo);
 	}
+	
+	public int delectInfoById(String Id){
+		return dbInfoMapper.deleteByPrimaryKey(Id);
+	}
+	
+	/**
+	 * 判断数据源是否被使用
+	 * @param Id
+	 * @return 使用返回true
+	 */
+	public boolean isDbUsed(String Id){
+		int count = dbInfoMapper.usedCount(Id);
+		if(count>0)
+			return true;
+		return false;
+	}
+	
 
 }

@@ -18,4 +18,6 @@ public interface DbInfoMapper {
     int updateByPrimaryKey(DbInfo record);
     
     List<DbInfo> getInfoList();
+    
+    int usedCount(String id);
 }
