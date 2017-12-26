@@ -25,6 +25,9 @@
     <include refid="Base_Column_List" />
     from db_info
   </select>
+   <select id="usedCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(1) from data_info where db_id = #{id,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from db_info
     where id = #{id,jdbcType=VARCHAR}

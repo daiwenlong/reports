@@ -29,8 +29,8 @@
 						<tr>
 							<th  width="10%">编号</th>
 							<th  width="25%">名称</th>
+							<th  width="25%">地址</th>
 							<th  width="25%">级别</th>
-							<th  width="25%">状态</th>
 							<th  width="25%">操作</th>
 						</tr>
 					</thead>
@@ -39,9 +39,12 @@
 						<tr>
 						   <td>${db.id }</td>
 						   <td>${db.dbName }</td>
+						   <td>${db.dbAddress }</td>
 						   <td>${db.level }</td>
-						   <td>${db.status }</td>
-						   <td><a href="javascript:void(0);" onclick="edit('${db.id }');">编辑</a></td> 
+						   <td>
+						   		<a href="javascript:void(0);" onclick="edit('${db.id }');">编辑</a>
+						   		<a href="javascript:void(0);" onclick="delect('${db.id }');">删除</a>
+						   </td> 
 						</tr>
 					</c:forEach>	
 					</tbody>
@@ -55,6 +58,15 @@
 <script type="text/javascript">
 function edit(Id){
 	window.location.href="${ctx}/db/toDbEdit?dbId="+Id;
+}
+
+function delect(id){
+	if(confirm("确定删除吗？")){
+		$.post("${ctx}/db/delDbInfo",{dbId:id},function(data){
+			alert(data);
+			window.location.reload();
+		})
+	}
 }
 </script>
 </body>

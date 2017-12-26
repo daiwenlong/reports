@@ -6,11 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dwl.rep.common.ConUtils;
 import com.dwl.rep.common.Strings;
 import com.dwl.rep.pojo.DbInfo;
 import com.dwl.rep.service.DbService;
+import com.dwl.rep.service.NumService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
@@ -26,6 +28,15 @@ public class DbController {
 	@Resource
 	private DbService dbService;
 	
+	@Resource
+	private NumService numService;
+	
+	/**
+	 * 获取数据源列表
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/getInfoList")
 	public String getInfoList(Model model,HttpServletRequest request){
 		Page<DbInfo> page = ConUtils.setPage(request);
@@ -36,6 +47,12 @@ public class DbController {
 		
 	}
 	
+	/**
+	 * 编辑数据源
+	 * @param dbId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/toDbEdit")
 	public String toDbEdit(String dbId,Model model){
 		DbInfo dbInfo = null;
@@ -46,14 +63,35 @@ public class DbController {
 		return "db/info_edit";
 	}
 	
+	/**
+	 * 保存数据源
+	 * @param dbInfo
+	 * @return
+	 */
 	@RequestMapping("/toDbSave")
 	public String addOrEdit(DbInfo dbInfo){
 		if(Strings.isEmpty(dbInfo.getId())){
+			dbInfo.setId(numService.getNum("DB"));
 			dbService.saveDbInfo(dbInfo);
 		}else{
 			dbService.updateDbInfo(dbInfo);
 		}
 		return "redirect:/db/getInfoList";	
+	}
+	
+	/**
+	 * 删除数据源
+	 * @param dbId
+	 * @return
+	 */
+	@RequestMapping("/delDbInfo")
+	@ResponseBody
+	public String delectDbInfo(String dbId){
+		if(dbService.isDbUsed(dbId))
+			return "dataBase is used!";
+		if(dbService.delectInfoById(dbId)>0)
+			return "delete success!";
+		return "delete failed!";
 	}
 
 }
