@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.dwl.rep.common.ConUtils;
+import com.dwl.rep.common.SqlEexecuter;
 import com.dwl.rep.common.Strings;
 import com.dwl.rep.pojo.DataInfo;
 import com.dwl.rep.pojo.DbInfo;
@@ -101,6 +103,25 @@ public class DataController {
 			map.put(dbInfo.getId(), dbInfo.getDbName());
 		});
 		return JSON.toJSONString(map);
+	}
+	
+	/**
+	 * 根据dataId获取结果集
+	 * @param dataId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/getData")
+	public String getData(String dataId,Model model){
+		DataInfo dataInfo = dataService.getInfoWithDbById(dataId);
+		if(Strings.isEmpty(dataInfo.getResult())){
+			List<Map<String, Object>> result = SqlEexecuter.getInstance().getResult(dataInfo);
+			dataInfo.setResult(JSON.toJSONString(result));
+			dataService.updateData(dataInfo);
+		}
+		model.addAttribute("dataInfo",dataInfo);
+		model.addAttribute("data", JSONArray.parse(dataInfo.getResult()));
+		return "data/info_data";
 	}
 
 }

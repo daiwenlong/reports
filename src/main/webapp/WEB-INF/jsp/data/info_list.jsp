@@ -25,10 +25,10 @@
 		<table  class="table table-bordered table-striped" id="dynamic-table">
 			<thead>
 				<tr>
-					<th  width="10%">编号</th>
+					<th  width="5%">编号</th>
 					<th  width="25%">名称</th>
-					<th  width="25%">数据源</th>
-					<th  width="25%">更新时间</th>
+					<th  width="20%">数据源</th>
+					<th  width="20%">更新时间</th>
 					<th  width="25%">操作</th>
 				</tr>
 			</thead>
@@ -39,7 +39,11 @@
 				   <td>${data.dataName }</td>
 				   <td>${data.dbInfo.dbName }</td>
 				   <td><fmt:formatDate value="${data.updateTime }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
-				   <td><a href="javascript:void(0);" onclick="edit('${data.id }');">编辑</a></td> 
+				   <td>
+					   <a href="javascript:void(0);" onclick="edit('${data.id }');">编辑</a>
+					   <a href="javascript:void(0);" onclick="view('${data.id }');">查看数据</a>
+					   <a href="javascript:void(0);" onclick="edit('');">更新数据</a>
+				   </td> 
 				</tr>
 			</c:forEach>	
 			</tbody>
@@ -53,6 +57,9 @@
 <script type="text/javascript">
 function edit(Id){
 	window.location.href="${ctx}/data/toDataEdit?dataId="+Id;
+}
+function view(Id){
+	window.open("${ctx}/data/getData?dataId="+Id)
 }
 </script>
 </body>
