@@ -2,90 +2,62 @@
 	pageEncoding="utf-8"%>
 <%@ include file="/common/setting.jsp"%>
 <html>
+<title>${title }</title>
 <link rel="stylesheet" type="text/css" href="${ctx}/reports/tiles/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="${ctx}/reports/tiles/ace/css/ace.min.css" />
-<link rel="stylesheet" type="text/css" href="${ctx}/reports/tiles/ace/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="${ctx}/reports/skins/css/reports.css" />
 <script type="text/javascript" src="${ctx}/reports/tiles/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="${ctx}/reports/tiles/bootstrap/js/bootstrap.min.js"></script>
 <body>
 <jsp:include page="/common/header.jsp"/>
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12">
-			<h3 class="header smaller lighter green">数据源配置</h3>
-
-			<p>
-				<a href="${ctx }/db/getInfoList" class="btn btn-default btn-app radius-4">
-					<i class="icon-cog bigger-330"></i>
-					数据源
+	
+		<div class="col-xs-12 mar-t-10">
+		<div class="panel panel-primary">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Panel title</h3>
+		  </div>
+		  <div class="panel-body">
+		    <a href="${ctx }/db/getInfoList" class="btn btn-success btn-lg">
+									数据源
 					
-				</a>
+			</a>
 
-				<a href="${ctx }/data/getInfoList" class="btn btn-app btn-primary no-radius">
-					<i class="icon-edit bigger-230"></i>
-					数据项
-					
-				</a>
-
-				<a href="#" class="btn btn-app btn-success">
-					<i class="icon-refresh bigger-230"></i>
-					字典
-				</a>
-
+			<a href="${ctx }/data/getInfoList" class="btn btn-info btn-lg">
+			
+				数据项
 				
-			</p>
+			</a>
+
+			<a href="${ctx }/rep/getInfoList" class="btn btn-warning btn-lg">
+			
+				报表
+			</a>
+		  </div>
+		  
 		</div>
-		
-		<div class="col-xs-12">
-			<h3 class="header smaller lighter green">Application Buttons</h3>
-
-			<p>
-				<a href="#" class="btn btn-default btn-app radius-4">
-					<i class="icon-cog bigger-330"></i>
-					Default
-					
-				</a>
-
-				<a href="#" class="btn btn-app btn-primary no-radius">
-					<i class="icon-edit bigger-230"></i>
-					编辑
-					
-				</a>
-
-				<a href="#" class="btn btn-app btn-success">
-					<i class="icon-refresh bigger-230"></i>
-					Reload
-				</a>
-
-				
-			</p>
+		<div class="panel panel-success">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Panel title</h3>
+		  </div>
+		  <div class="panel-body">
+		   
+		  </div>
+		  
 		</div>
-		<div class="col-xs-12">
-			<h3 class="header smaller lighter green">Application Buttons</h3>
-
-			<p>
-				<a href="#" class="btn btn-default btn-app radius-4">
-					<i class="icon-cog bigger-330"></i>
-					Default
-					
-				</a>
-
-				<a href="#" class="btn btn-app btn-primary no-radius">
-					<i class="icon-edit bigger-230"></i>
-					编辑
-					
-				</a>
-
-				<a href="#" class="btn btn-app btn-success">
-					<i class="icon-refresh bigger-230"></i>
-					Reload
-				</a>
-
-				
-			</p>
+		<div class="panel panel-info">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Panel title</h3>
+		  </div>
+		  <div class="panel-body">
+		   
+		  </div>
+		  
+		</div>
 		</div>
 	</div>
 
 </div>
+<jsp:include page="/common/foot.jsp"/>
 </body>
 </html>
