@@ -4,10 +4,93 @@ html {
 }
 
 body {
-	background-color:#FFFFFF;
+    padding-top: 50px;
     padding-bottom: 20px;
     margin-bottom: 100px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 16px;
     line-height: 1.5;
 }
+
+.mar-b-10{
+	 margin-bottom: 10px;
+}
+
+.mar-t-10{
+	 margin-top: 10px;
+}
+.page-header{
+	border-bottom: 1px solid #28321f;
+}
+
+
+/* Header
+-------------------------------------------------- */
+#mainnav {
+    font-size: 14px;
+    line-height: 1.42;
+    font-weight: bold;
+    background-color: #424F63;
+}
+
+.navbar-brand {
+    float: left;
+    padding: 15px 15px 15px 45px;
+    font-size: 26px;
+    font-family: 'amblebold_italic';
+    font-weight: normal;
+    line-height: 22px;
+    height: 50px;
+}
+.navbar-title {
+    color: #6CC2A2;
+}
+.navbar-menu {
+    color: white;
+}
+
+.header {
+    background: #8ba8af;
+    padding: 30px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #E3E3E3;
+}
+
+.header h1 {
+    color: #fff;
+    font-size: 26px;
+    padding: 0px;
+    margin: 0px;
+}
+
+
+/* Footer
+-------------------------------------------------- */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 50px;
+    border-top: 1px solid #ccc;
+}
+
+.footer-copyright p {
+    margin: 20px 0px;
+    color: #c0c0c0;
+}
+
+.footer-copyright a {
+    color: #ffffff;
+}
+
+.footer .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.footer .footer-copyright {
+    background-color: #3e3e3e;
+}
+
+
