@@ -53,10 +53,10 @@ public class SqlEexecuter {
 	 * @param dataInfo
 	 * @return
 	 */
-	public List<Map<String, Object>> getResult(DataInfo dataInfo){
+	public Map<String, Object> getResult(DataInfo dataInfo){
 		String[] params = Strings.splitIgnoreBlank(dataInfo.getParams());
-		List<Map<String, Object>> list = executeQuery(dataInfo.getSql(), params, dataInfo.getDbInfo());
-		return list;
+		Map<String, Object> data = executeQuery(dataInfo.getSql(), params, dataInfo.getDbInfo());
+		return data;
 	}
 	
 	/**
@@ -66,7 +66,8 @@ public class SqlEexecuter {
 	 * @param dbInfo
 	 * @return
 	 */
-	public List<Map<String, Object>> executeQuery(String sql,String[] params,DbInfo dbInfo){
+	public Map<String, Object> executeQuery(String sql,String[] params,DbInfo dbInfo){
+		Map<String, Object> result = new HashMap<>();
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		ResultSet resultSet = null;
 		Connection connection = null;
@@ -81,6 +82,11 @@ public class SqlEexecuter {
 		    logger.info(sql+" - 执行完毕");
 		    ResultSetMetaData metaData = resultSet.getMetaData();
 			int cols_len = metaData.getColumnCount();
+			StringBuilder builder = new StringBuilder();
+			for(int i = 1; i < cols_len; i++){
+				builder.append(metaData.getColumnLabel(i)).append("+");
+	    	}
+			builder.deleteCharAt(builder.length()-1);
 		    while(resultSet.next()){
 		    	Map<String, Object> map = new HashMap<>();
 		    	String colName;
@@ -88,7 +94,9 @@ public class SqlEexecuter {
 		    		map.put(colName = metaData.getColumnLabel(i + 1), resultSet.getString(colName));
 		    	}
 		    	list.add(map);
-		    }	
+		    }
+		    result.put(builder.toString(), list);
+		    result.put(Constants.KEY, builder.toString());
 		} catch (SQLException e) {
 			logger.info(sql+" - 执行异常");
 			e.printStackTrace();
@@ -109,7 +117,7 @@ public class SqlEexecuter {
 				}
 			}
 		}
-		return list;
+		return result;
 		
 	}
 	

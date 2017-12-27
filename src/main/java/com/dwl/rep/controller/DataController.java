@@ -115,12 +115,11 @@ public class DataController {
 	public String getData(String dataId,Model model){
 		DataInfo dataInfo = dataService.getInfoWithDbById(dataId);
 		if(Strings.isEmpty(dataInfo.getResult())){
-			List<Map<String, Object>> result = SqlEexecuter.getInstance().getResult(dataInfo);
+			Map<String, Object> result = SqlEexecuter.getInstance().getResult(dataInfo);
 			dataInfo.setResult(JSON.toJSONString(result));
 			dataService.updateData(dataInfo);
 		}
 		model.addAttribute("dataInfo",dataInfo);
-		model.addAttribute("data", JSONArray.parse(dataInfo.getResult()));
 		return "data/info_data";
 	}
 	
@@ -148,8 +147,8 @@ public class DataController {
 	@ResponseBody
 	public String updateResult(String dataId){
 		DataInfo dataInfo = dataService.getInfoWithDbById(dataId);
-		List<Map<String, Object>> result = SqlEexecuter.getInstance().getResult(dataInfo);
-		dataInfo.setResult(JSON.toJSONString(result));
+		Map<String, Object> result = SqlEexecuter.getInstance().getResult(dataInfo);
+		dataInfo.setResult(ConUtils.dataToJson(result));
 		if(dataService.updateData(dataInfo)>0)
 			return "update success!";
 		return "update failed";
