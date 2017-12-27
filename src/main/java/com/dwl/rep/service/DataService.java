@@ -1,5 +1,6 @@
 package com.dwl.rep.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -32,7 +33,12 @@ public class DataService {
 	}
 	
 	public int updateData(DataInfo dataInfo) {
+		dataInfo.setUpdateTime(new Date());
 		return dataInfoMapper.updateByPrimaryKey(dataInfo);
+	}
+	
+	public int delectInfoById(String id){
+		return dataInfoMapper.deleteByPrimaryKey(id);
 	}
 
 }

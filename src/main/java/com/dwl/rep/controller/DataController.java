@@ -123,5 +123,36 @@ public class DataController {
 		model.addAttribute("data", JSONArray.parse(dataInfo.getResult()));
 		return "data/info_data";
 	}
+	
+	
+	/**
+	 * 删除数据项
+	 * @param dataId
+	 * @return
+	 */
+	@RequestMapping("/delDataInfo")
+	@ResponseBody
+	public String delDataInfo(String dataId){
+		if(dataService.delectInfoById(dataId)>0)
+			return "delete success!";
+		return "delete failed!";
+	}
+	
+	
+	/**
+	 * 更新数据
+	 * @param dataId
+	 * @return
+	 */
+	@RequestMapping("/updateResult")
+	@ResponseBody
+	public String updateResult(String dataId){
+		DataInfo dataInfo = dataService.getInfoWithDbById(dataId);
+		List<Map<String, Object>> result = SqlEexecuter.getInstance().getResult(dataInfo);
+		dataInfo.setResult(JSON.toJSONString(result));
+		if(dataService.updateData(dataInfo)>0)
+			return "update success!";
+		return "update failed";
+	}
 
 }

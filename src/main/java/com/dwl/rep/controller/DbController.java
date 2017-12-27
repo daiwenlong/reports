@@ -31,9 +31,6 @@ public class DbController {
 	@Resource
 	private NumService numService;
 	
-	@Resource
-	private NumService numService;
-	
 	/**
 	 * 获取数据源列表
 	 * @param model

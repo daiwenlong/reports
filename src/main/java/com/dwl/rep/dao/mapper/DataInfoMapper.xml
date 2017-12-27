@@ -38,7 +38,7 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from data_info
-    where id = #{id,jdbcType=VARCHAR}
+    where data_id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.dwl.rep.pojo.DataInfo">
     insert into data_info (data_id, db_id, data_name, 
