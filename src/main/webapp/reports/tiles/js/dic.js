@@ -37,3 +37,11 @@ $.fn.ajaxselect = function(options) {
 	    }
 	});
 };
+
+function dicvalue(items,dic){
+	if(items!=null){
+		items.each(function(){
+			$(this).html(dic[$(this).text()]);
+		});
+	}
+};
