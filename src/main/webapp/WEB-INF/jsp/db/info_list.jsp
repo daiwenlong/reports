@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="${ctx}/reports/skins/css/reports.css" />
 <script type="text/javascript" src="${ctx}/reports/tiles/js/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="${ctx}/reports/tiles/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${ctx}/reports/tiles/js/dic.js"></script>
 <body>
 <jsp:include page="/common/header.jsp"/>
 <div class="container">
@@ -40,7 +41,7 @@
 						   <td>${db.id }</td>
 						   <td>${db.dbName }</td>
 						   <td>${db.dbAddress }</td>
-						   <td>${db.level }</td>
+						   <td class="dic">${db.level }</td>
 						   <td>
 						   		<a href="javascript:void(0);" onclick="edit('${db.id }');">编辑</a>
 						   		<a href="javascript:void(0);" onclick="delect('${db.id }');">删除</a>
@@ -65,9 +66,14 @@ function delect(id){
 		$.post("${ctx}/db/delDbInfo",{dbId:id},function(data){
 			alert(data);
 			window.location.reload();
-		})
+		});
 	}
 }
+$(function(){
+	var dic ={"1":"一级","2":"二级","3":"三级"};
+	dicvalue($(".dic"),dic);
+});
+
 </script>
 </body>
 </html>

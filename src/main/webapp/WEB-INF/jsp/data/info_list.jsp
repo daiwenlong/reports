@@ -41,8 +41,9 @@
 				   <td><fmt:formatDate value="${data.updateTime }" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
 				   <td>
 					   <a href="javascript:void(0);" onclick="edit('${data.id }');">编辑</a>
+					   <a href="javascript:void(0);" onclick="delect('${data.id }');">删除</a>
 					   <a href="javascript:void(0);" onclick="view('${data.id }');">查看数据</a>
-					   <a href="javascript:void(0);" onclick="edit('');">更新数据</a>
+					   <a href="javascript:void(0);" onclick="update('${data.id }');">更新数据</a> 
 				   </td> 
 				</tr>
 			</c:forEach>	
@@ -60,6 +61,19 @@ function edit(Id){
 }
 function view(Id){
 	window.open("${ctx}/data/getData?dataId="+Id)
+}
+function delect(Id){
+	if(confirm("确定删除吗？")){
+		$.post("${ctx}/data/delDataInfo",{dataId:Id},function(data){
+			alert(data);
+			window.location.reload();
+		});
+	}
+}
+function update(Id){
+	$.post("${ctx}/data/updateResult",{dataId:Id},function(data){
+		alert(data);
+	});
 }
 </script>
 </body>
