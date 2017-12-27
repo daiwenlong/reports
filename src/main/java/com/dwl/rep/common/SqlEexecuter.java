@@ -85,7 +85,7 @@ public class SqlEexecuter {
 		    	Map<String, Object> map = new HashMap<>();
 		    	String colName;
 		    	for(int i = 0; i < cols_len; i++){
-		    		map.put(colName = metaData.getColumnName(i + 1), resultSet.getString(colName));
+		    		map.put(colName = metaData.getColumnLabel(i + 1), resultSet.getString(colName));
 		    	}
 		    	list.add(map);
 		    }	
