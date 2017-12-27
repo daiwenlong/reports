@@ -42,7 +42,7 @@ public class ConUtils {
 			for(int i = 0; i < columns.length; i++){
 				builder.append(item.get(columns[i])).append("+");
 	    	}
-			String dataKey =builder.deleteCharAt(builder.length()-1).toString();
+			builder.deleteCharAt(builder.length()-1).toString();
 			kvData.put(builder.toString(), item.get(Constants.VALUE));
 		});
 		return JSON.toJSONString(kvData);
