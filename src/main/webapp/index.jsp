@@ -21,7 +21,7 @@
 		    <a href="${ctx }/db/getInfoList" class="btn btn-success btn-lg">
 									数据源
 			</a>
-			 <a href="#" class="btn btn-info btn-lg">
+			 <a href="${ctx }/head/getInfoList" class="btn btn-info btn-lg">
 									表头
 			</a>
 			
