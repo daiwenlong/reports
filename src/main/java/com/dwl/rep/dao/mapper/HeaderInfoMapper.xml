@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dwl.rep.dao.HeaderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.dwl.rep.pojo.HeaderInfo">
+    <id column="header_id" jdbcType="VARCHAR" property="headerId" />
+    <result column="header_dm" jdbcType="VARCHAR" property="headerDm" />
+    <result column="header_name" jdbcType="VARCHAR" property="headerName" />
+    <collection property="details" column="header_id" ofType="com.dwl.rep.pojo.HeaderDetail">  
+        <id column="id" jdbcType="VARCHAR" property="id" />
+	    <result column="header_id" jdbcType="VARCHAR" property="headerId" />
+	    <result column="key" jdbcType="VARCHAR" property="key" />
+	    <result column="value" jdbcType="VARCHAR" property="value" />
+	    <result column="orders" jdbcType="INTEGER" property="orders" />
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    header_id, header_dm, header_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from header_info
+    where header_id = #{headerId,jdbcType=VARCHAR}
+  </select>
+    <select id="selectWithDetailByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    info.*,detail.* from header_info info,header_detail detail where info.header_id = detail.header_id 
+    and info.header_id = #{headerId,jdbcType=VARCHAR}
+  </select>
+   <select id="selectInfoList" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from header_info
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from header_info
+    where header_id = #{headerId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dwl.rep.pojo.HeaderInfo">
+    insert into header_info (header_id, header_dm, header_name
+      )
+    values (#{headerId,jdbcType=VARCHAR}, #{headerDm,jdbcType=VARCHAR}, #{headerName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dwl.rep.pojo.HeaderInfo">
+    insert into header_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="headerId != null">
+        header_id,
+      </if>
+      <if test="headerDm != null">
+        header_dm,
+      </if>
+      <if test="headerName != null">
+        header_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="headerId != null">
+        #{headerId,jdbcType=VARCHAR},
+      </if>
+      <if test="headerDm != null">
+        #{headerDm,jdbcType=VARCHAR},
+      </if>
+      <if test="headerName != null">
+        #{headerName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dwl.rep.pojo.HeaderInfo">
+    update header_info
+    <set>
+      <if test="headerDm != null">
+        header_dm = #{headerDm,jdbcType=VARCHAR},
+      </if>
+      <if test="headerName != null">
+        header_name = #{headerName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where header_id = #{headerId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dwl.rep.pojo.HeaderInfo">
+    update header_info
+    set header_dm = #{headerDm,jdbcType=VARCHAR},
+      header_name = #{headerName,jdbcType=VARCHAR}
+    where header_id = #{headerId,jdbcType=VARCHAR}
+  </update>
+</mapper>
