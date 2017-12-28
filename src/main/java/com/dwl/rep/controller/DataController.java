@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.dwl.rep.common.ConUtils;
 import com.dwl.rep.common.SqlEexecuter;
 import com.dwl.rep.common.Strings;
@@ -115,7 +114,7 @@ public class DataController {
 	public String getData(String dataId,Model model){
 		DataInfo dataInfo = dataService.getInfoWithDbById(dataId);
 		if(Strings.isEmpty(dataInfo.getResult())){
-			Map<String, Object> result = SqlEexecuter.getInstance().getResult(dataInfo);
+			List<Map<String, Object>> result = SqlEexecuter.getInstance().getResult(dataInfo);
 			dataInfo.setResult(JSON.toJSONString(result));
 			dataService.updateData(dataInfo);
 		}
@@ -147,8 +146,8 @@ public class DataController {
 	@ResponseBody
 	public String updateResult(String dataId){
 		DataInfo dataInfo = dataService.getInfoWithDbById(dataId);
-		Map<String, Object> result = SqlEexecuter.getInstance().getResult(dataInfo);
-		dataInfo.setResult(ConUtils.dataToJson(result));
+		List<Map<String, Object>> result = SqlEexecuter.getInstance().getResult(dataInfo);
+		dataInfo.setResult(JSON.toJSONString(result));
 		if(dataService.updateData(dataInfo)>0)
 			return "update success!";
 		return "update failed";
