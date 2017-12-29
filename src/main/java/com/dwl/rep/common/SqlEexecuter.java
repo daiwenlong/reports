@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.dwl.rep.common.DB.DataBaseFactory;
 import com.dwl.rep.pojo.DataInfo;
 import com.dwl.rep.pojo.DbInfo;
 
@@ -72,7 +73,7 @@ public class SqlEexecuter {
 		Connection connection = null;
 		PreparedStatement pstat = null;
 		try {
-			connection = DbUtil.getInstance().getConnection(dbInfo);
+			connection = DataBaseFactory.getInstance().getConnection(dbInfo);
 			pstat = connection.prepareStatement(sql);
 			for(int i=0;i<params.length;i++){
 				pstat.setString(i+1, params[i]);
