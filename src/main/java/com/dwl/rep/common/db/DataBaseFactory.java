@@ -86,11 +86,18 @@ public class DataBaseFactory {
 	 * @return
 	 * @throws SQLException
 	 */
-	public Connection getConnection(DbInfo dbInfo) throws SQLException{
-		if(!dbMap.containsKey(dbInfo.getId())){
+	public Connection getConnection(DbInfo dbInfo){
+		Connection connection = null;
+		if(!dbMap.containsKey(dbInfo.getId()))
 			addDataSource(dbInfo);
+		try {
+			connection = dbMap.get(dbInfo.getId()).getConnection();
+		} catch (SQLException e) {
+			removeDataSource(dbInfo);
+			logger.info(dbInfo.getDbName()+" -无法获取连接！");
+			e.printStackTrace();
 		}
-		return dbMap.get(dbInfo.getId()).getConnection();
+		return connection;
 	}
 	
 	/**
@@ -144,6 +151,8 @@ public class DataBaseFactory {
 	 */
 	public void testConnection(DbInfo dbInfo) throws SQLException{
 		Connection conn = getConnection(dbInfo);
+		if(conn == null)
+			throw new SQLException();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(getDataBase(dbInfo).getLinkSql());
 		if(rs.next())

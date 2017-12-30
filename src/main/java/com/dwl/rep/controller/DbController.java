@@ -78,6 +78,7 @@ public class DbController {
 			dbService.saveDbInfo(dbInfo);
 		}else{
 			dbService.updateDbInfo(dbInfo);
+			DataBaseFactory.getInstance().removeDataSource(dbInfo);
 		}
 		return "redirect:/db/getInfoList";	
 	}
