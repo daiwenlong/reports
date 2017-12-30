@@ -14,4 +14,6 @@ public interface HeaderDetailMapper {
     int updateByPrimaryKeySelective(HeaderDetail record);
 
     int updateByPrimaryKey(HeaderDetail record);
+    
+    int deleteByHeaderId(String id);
 }

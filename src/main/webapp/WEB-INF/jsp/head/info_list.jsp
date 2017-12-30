@@ -57,7 +57,7 @@ function edit(Id){
 }
 function delect(Id){
 	if(confirm("确定删除吗？")){
-		$.post("${ctx}/head/delHeadInfo",{dataId:Id},function(data){
+		$.post("${ctx}/head/delHeadInfo",{headerId:Id},function(data){
 			alert(data);
 			window.location.reload();
 		});

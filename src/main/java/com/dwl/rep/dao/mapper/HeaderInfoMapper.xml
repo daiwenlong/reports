@@ -8,7 +8,7 @@
     <collection property="details" column="header_id" ofType="com.dwl.rep.pojo.HeaderDetail">  
         <id column="id" jdbcType="VARCHAR" property="id" />
 	    <result column="header_id" jdbcType="VARCHAR" property="headerId" />
-	    <result column="key" jdbcType="VARCHAR" property="key" />
+	    <result column="key_name" jdbcType="VARCHAR" property="key" />
 	    <result column="value" jdbcType="VARCHAR" property="value" />
 	    <result column="orders" jdbcType="INTEGER" property="orders" />
     </collection>
@@ -25,7 +25,7 @@
     <select id="selectWithDetailByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     info.*,detail.* from header_info info,header_detail detail where info.header_id = detail.header_id 
-    and info.header_id = #{headerId,jdbcType=VARCHAR}
+    and info.header_id = #{headerId,jdbcType=VARCHAR} order by orders
   </select>
    <select id="selectInfoList" parameterType="java.lang.String" resultMap="BaseResultMap">
      select 

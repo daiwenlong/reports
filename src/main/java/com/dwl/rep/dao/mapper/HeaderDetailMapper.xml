@@ -4,12 +4,12 @@
   <resultMap id="BaseResultMap" type="com.dwl.rep.pojo.HeaderDetail">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="header_id" jdbcType="VARCHAR" property="headerId" />
-    <result column="key" jdbcType="VARCHAR" property="key" />
+    <result column="key_name" jdbcType="VARCHAR" property="key" />
     <result column="value" jdbcType="VARCHAR" property="value" />
     <result column="orders" jdbcType="INTEGER" property="orders" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, header_id, key, value, orders
+    id, header_id, key_name, value, orders
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -21,8 +21,12 @@
     delete from header_detail
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+  <delete id="deleteByHeaderId" parameterType="java.lang.String">
+    delete from header_detail
+    where header_id = #{id,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" parameterType="com.dwl.rep.pojo.HeaderDetail">
-    insert into header_detail (id, header_id, key, 
+    insert into header_detail (id, header_id, key_name, 
       value, orders)
     values (#{id,jdbcType=VARCHAR}, #{headerId,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
       #{value,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER})
@@ -37,7 +41,7 @@
         header_id,
       </if>
       <if test="key != null">
-        key,
+        key_name,
       </if>
       <if test="value != null">
         value,
@@ -71,7 +75,7 @@
         header_id = #{headerId,jdbcType=VARCHAR},
       </if>
       <if test="key != null">
-        key = #{key,jdbcType=VARCHAR},
+        key_name = #{key,jdbcType=VARCHAR},
       </if>
       <if test="value != null">
         value = #{value,jdbcType=VARCHAR},
@@ -85,7 +89,7 @@
   <update id="updateByPrimaryKey" parameterType="com.dwl.rep.pojo.HeaderDetail">
     update header_detail
     set header_id = #{headerId,jdbcType=VARCHAR},
-      key = #{key,jdbcType=VARCHAR},
+      key_name = #{key,jdbcType=VARCHAR},
       value = #{value,jdbcType=VARCHAR},
       orders = #{orders,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
