@@ -1,6 +1,6 @@
-package com.dwl.rep.common.DB.impl;
+package com.dwl.rep.common.db.impl;
 
-import com.dwl.rep.common.DB.DataBase;
+import com.dwl.rep.common.db.DataBase;
 
 public class SQLiteBase implements DataBase {
 

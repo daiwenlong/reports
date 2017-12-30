@@ -1,4 +1,4 @@
-package com.dwl.rep.common.DB;
+package com.dwl.rep.common.db;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,11 +10,11 @@ import java.util.Map;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
 
-import com.dwl.rep.common.DB.impl.MySQLBase;
-import com.dwl.rep.common.DB.impl.OracleBase;
-import com.dwl.rep.common.DB.impl.PostgreSQLBase;
-import com.dwl.rep.common.DB.impl.SQLServerBase;
-import com.dwl.rep.common.DB.impl.SQLiteBase;
+import com.dwl.rep.common.db.impl.MySQLBase;
+import com.dwl.rep.common.db.impl.OracleBase;
+import com.dwl.rep.common.db.impl.PostgreSQLBase;
+import com.dwl.rep.common.db.impl.SQLServerBase;
+import com.dwl.rep.common.db.impl.SQLiteBase;
 import com.dwl.rep.pojo.DbInfo;
 
 public class DataBaseFactory {
@@ -128,11 +128,11 @@ public class DataBaseFactory {
 		if(dataSource != null){
 			try {
 				dataSource.close();
+				dbMap.remove(dbInfo.getId());
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		dbMap.remove(dbInfo.getId());
 		logger.info(dbInfo.getDbName()+" - 移除成功");
 	}
 	

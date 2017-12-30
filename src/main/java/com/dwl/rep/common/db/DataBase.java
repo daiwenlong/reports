@@ -1,4 +1,4 @@
-package com.dwl.rep.common.DB;
+package com.dwl.rep.common.db;
 
 import org.apache.commons.dbcp.BasicDataSource;
 
