@@ -30,9 +30,10 @@
 						<tr>
 							<th  width="10%">编号</th>
 							<th  width="25%">名称</th>
+							<th  width="10%">类型</th>
 							<th  width="25%">地址</th>
-							<th  width="25%">级别</th>
-							<th  width="25%">操作</th>
+							<th  width="10%">级别</th>
+							<th  width="20%">操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,11 +41,13 @@
 						<tr>
 						   <td>${db.id }</td>
 						   <td>${db.dbName }</td>
+						   <td>${db.dbType }</td>
 						   <td>${db.dbAddress }</td>
 						   <td class="dic">${db.level }</td>
 						   <td>
 						   		<a href="javascript:void(0);" onclick="edit('${db.id }');">编辑</a>
 						   		<a href="javascript:void(0);" onclick="delect('${db.id }');">删除</a>
+						   		<a href="javascript:void(0);" onclick="conn('${db.id }');">测试连接</a>
 						   </td> 
 						</tr>
 					</c:forEach>	
@@ -73,6 +76,11 @@ $(function(){
 	var dic ={"1":"一级","2":"二级","3":"三级"};
 	dicvalue($(".dic"),dic);
 });
+function conn(id){
+	$.post("${ctx}/db/connDataBase",{dbId:id},function(data){
+		alert(data);
+	});
+}
 
 </script>
 </body>

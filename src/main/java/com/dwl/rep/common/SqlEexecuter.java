@@ -12,7 +12,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.dwl.rep.common.DB.DataBaseFactory;
+import com.dwl.rep.common.db.DataBaseFactory;
 import com.dwl.rep.pojo.DataInfo;
 import com.dwl.rep.pojo.DbInfo;
 

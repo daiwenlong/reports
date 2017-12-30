@@ -1,5 +1,7 @@
 package com.dwl.rep.controller;
 
+import java.sql.SQLException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dwl.rep.common.ConUtils;
 import com.dwl.rep.common.Strings;
+import com.dwl.rep.common.db.DataBaseFactory;
 import com.dwl.rep.pojo.DbInfo;
 import com.dwl.rep.service.DbService;
 import com.dwl.rep.service.NumService;
@@ -89,9 +92,28 @@ public class DbController {
 	public String delectDbInfo(String dbId){
 		if(dbService.isDbUsed(dbId))
 			return "dataBase is used!";
+		DataBaseFactory.getInstance().removeDataSource(dbService.getInfoById(dbId));
 		if(dbService.delectInfoById(dbId)>0)
 			return "delete success!";
 		return "delete failed!";
+	}
+	
+	
+	/**
+	 * 测试数据库连接
+	 * @param dbId
+	 * @return
+	 */
+	@RequestMapping("/connDataBase")
+	@ResponseBody
+	public String connDataBase(String dbId){
+		DbInfo dbInfo = dbService.getInfoById(dbId);
+		try {
+			DataBaseFactory.getInstance().testConnection(dbInfo);
+			return "connection success!";
+		} catch (SQLException e) {
+			return "connection failed";
+		}
 	}
 
 }

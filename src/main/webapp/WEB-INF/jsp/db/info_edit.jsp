@@ -37,10 +37,11 @@
 		</div>
 		<div class="space-4"></div>
 		<div class="form-group">
-			<label class="col-sm-3 control-label no-padding-right" for="form-field-1">数据源驱动</label>
+			<label class="col-sm-3 control-label no-padding-right" for="form-field-1">数据库类型</label>
 
 			<div class="col-sm-5">
-				<input type="text" id="dbType" name="dbType" class="form-control col-xs-10 col-sm-6" value="${dbInfo.dbType }"/>
+				<select class="form-control" id="dbType" name="dbType">
+				</select>
 			</div>
 		</div>
 		<div class="space-4"></div>
@@ -89,6 +90,11 @@ $(document).ready(function(){
 	$("#level").select({
 		dic:{"1":"一级","2":"二级","3":"三级"},
 		value:'${dbInfo.level}'
+	});
+	$("#dbType").select({
+		dic:{"MySQL":"MySQL","Oracle":"Oracle","SQLite":"SQLite",
+			"SQLServer":"SQLServer","PostgreSQL":"PostgreSQL"},
+		value:'${dbInfo.dbType}'
 	});
 	
 });
