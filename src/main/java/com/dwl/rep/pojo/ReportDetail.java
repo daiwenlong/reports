@@ -5,17 +5,36 @@ public class ReportDetail {
 
     private String repId;
 
-    private String dicId;
+    private String headerId;
 
-    private String dicName;
+    private String secHeaderId;
 
     private String isSum;
 
-    private String colName;
-
     private String type;
+    
+    private HeaderInfo headerInfo;
+    
+    private HeaderInfo secHeaderInfo;
+    
+    
+    public HeaderInfo getSecHeaderInfo() {
+		return secHeaderInfo;
+	}
 
-    public String getId() {
+	public void setSecHeaderInfo(HeaderInfo secHeaderInfo) {
+		this.secHeaderInfo = secHeaderInfo;
+	}
+
+	public HeaderInfo getHeaderInfo() {
+		return headerInfo;
+	}
+
+	public void setHeaderInfo(HeaderInfo headerInfo) {
+		this.headerInfo = headerInfo;
+	}
+
+	public String getId() {
         return id;
     }
 
@@ -31,20 +50,20 @@ public class ReportDetail {
         this.repId = repId;
     }
 
-    public String getDicId() {
-        return dicId;
+    public String getHeaderId() {
+        return headerId;
     }
 
-    public void setDicId(String dicId) {
-        this.dicId = dicId;
+    public void setHeaderId(String headerId) {
+        this.headerId = headerId;
     }
 
-    public String getDicName() {
-        return dicName;
+    public String getSecHeaderId() {
+        return secHeaderId;
     }
 
-    public void setDicName(String dicName) {
-        this.dicName = dicName;
+    public void setSecHeaderId(String secHeaderId) {
+        this.secHeaderId = secHeaderId;
     }
 
     public String getIsSum() {
@@ -53,14 +72,6 @@ public class ReportDetail {
 
     public void setIsSum(String isSum) {
         this.isSum = isSum;
-    }
-
-    public String getColName() {
-        return colName;
-    }
-
-    public void setColName(String colName) {
-        this.colName = colName;
     }
 
     public String getType() {

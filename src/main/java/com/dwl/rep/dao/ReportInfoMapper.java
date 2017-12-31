@@ -12,10 +12,10 @@ public interface ReportInfoMapper {
     int insertSelective(ReportInfo record);
 
     ReportInfo selectByPrimaryKey(String repId);
+    
+    ReportInfo selectWithDetailById(String repId);
 
     int updateByPrimaryKeySelective(ReportInfo record);
-
-    int updateByPrimaryKeyWithBLOBs(ReportInfo record);
 
     int updateByPrimaryKey(ReportInfo record);
     

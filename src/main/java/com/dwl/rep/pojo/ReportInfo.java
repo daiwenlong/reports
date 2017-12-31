@@ -3,59 +3,36 @@ package com.dwl.rep.pojo;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 报表实体
- * @author dwl
- *
- */
 public class ReportInfo {
-	
-    /**
-     * 主键
-     */
     private String repId;
 
-    /**
-     * 报表名称
-     */
     private String repName;
 
-    /**
-     * 行求和
-     */
-    private String rowSum;
+    private String templet;
 
-    /**
-     * 列求和
-     */
-    private String colSum;
+    private String result;
 
-    /**
-     * 是否缓存
-     */
     private String isCache;
 
-    /**
-     * corn表达式
-     */
     private String cornTime;
 
-    /**
-     * 更新时间
-     */
     private Date updateTime;
-
-    /**
-     * 初始化模板
-     */
-    private String templet;
     
-    /**
-     * 行列相关信息
-     */
+    private String hasSecHead1;
+    
+    private String hasSecHead2;
+    
     private List<ReportDetail> details;
 
-    public String getRepId() {
+    public List<ReportDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<ReportDetail> details) {
+		this.details = details;
+	}
+
+	public String getRepId() {
         return repId;
     }
 
@@ -71,20 +48,20 @@ public class ReportInfo {
         this.repName = repName;
     }
 
-    public String getRowSum() {
-        return rowSum;
+    public String getTemplet() {
+        return templet;
     }
 
-    public void setRowSum(String rowSum) {
-        this.rowSum = rowSum;
+    public void setTemplet(String templet) {
+        this.templet = templet;
     }
 
-    public String getColSum() {
-        return colSum;
+    public String getResult() {
+        return result;
     }
 
-    public void setColSum(String colSum) {
-        this.colSum = colSum;
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public String getIsCache() {
@@ -111,20 +88,22 @@ public class ReportInfo {
         this.updateTime = updateTime;
     }
 
-    public String getTemplet() {
-        return templet;
-    }
-
-    public void setTemplet(String templet) {
-        this.templet = templet;
-    }
-
-	public List<ReportDetail> getDetails() {
-		return details;
+	public String getHasSecHead1() {
+		return hasSecHead1;
 	}
 
-	public void setDetails(List<ReportDetail> details) {
-		this.details = details;
+	public void setHasSecHead1(String hasSecHead1) {
+		this.hasSecHead1 = hasSecHead1;
 	}
+
+	public String getHasSecHead2() {
+		return hasSecHead2;
+	}
+
+	public void setHasSecHead2(String hasSecHead2) {
+		this.hasSecHead2 = hasSecHead2;
+	}
+
+    
     
 }

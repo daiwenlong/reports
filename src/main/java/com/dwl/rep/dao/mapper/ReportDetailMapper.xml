@@ -4,14 +4,13 @@
   <resultMap id="BaseResultMap" type="com.dwl.rep.pojo.ReportDetail">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="rep_id" jdbcType="VARCHAR" property="repId" />
-    <result column="dic_id" jdbcType="VARCHAR" property="dicId" />
-    <result column="dic_name" jdbcType="VARCHAR" property="dicName" />
+    <result column="header_id" jdbcType="VARCHAR" property="headerId" />
+    <result column="sec_header_id" jdbcType="VARCHAR" property="secHeaderId" />
     <result column="is_sum" jdbcType="VARCHAR" property="isSum" />
-    <result column="col_name" jdbcType="VARCHAR" property="colName" />
     <result column="type" jdbcType="VARCHAR" property="type" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, rep_id, dic_id, dic_name, is_sum, col_name, type
+    id, rep_id, header_id, sec_header_id, is_sum, type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -24,12 +23,12 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.dwl.rep.pojo.ReportDetail">
-    insert into report_detail (id, rep_id, dic_id, 
-      dic_name, is_sum, col_name, 
-      type)
-    values (#{id,jdbcType=VARCHAR}, #{repId,jdbcType=VARCHAR}, #{dicId,jdbcType=VARCHAR}, 
-      #{dicName,jdbcType=VARCHAR}, #{isSum,jdbcType=VARCHAR}, #{colName,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR})
+    insert into report_detail (id, rep_id, header_id, 
+      sec_header_id, is_sum, type
+      )
+    values (#{id,jdbcType=VARCHAR}, #{repId,jdbcType=VARCHAR}, #{headerId,jdbcType=VARCHAR}, 
+      #{secHeaderId,jdbcType=VARCHAR}, #{isSum,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.dwl.rep.pojo.ReportDetail">
     insert into report_detail
@@ -40,17 +39,14 @@
       <if test="repId != null">
         rep_id,
       </if>
-      <if test="dicId != null">
-        dic_id,
+      <if test="headerId != null">
+        header_id,
       </if>
-      <if test="dicName != null">
-        dic_name,
+      <if test="secHeaderId != null">
+        sec_header_id,
       </if>
       <if test="isSum != null">
         is_sum,
-      </if>
-      <if test="colName != null">
-        col_name,
       </if>
       <if test="type != null">
         type,
@@ -63,17 +59,14 @@
       <if test="repId != null">
         #{repId,jdbcType=VARCHAR},
       </if>
-      <if test="dicId != null">
-        #{dicId,jdbcType=VARCHAR},
+      <if test="headerId != null">
+        #{headerId,jdbcType=VARCHAR},
       </if>
-      <if test="dicName != null">
-        #{dicName,jdbcType=VARCHAR},
+      <if test="secHeaderId != null">
+        #{secHeaderId,jdbcType=VARCHAR},
       </if>
       <if test="isSum != null">
         #{isSum,jdbcType=VARCHAR},
-      </if>
-      <if test="colName != null">
-        #{colName,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
@@ -86,17 +79,14 @@
       <if test="repId != null">
         rep_id = #{repId,jdbcType=VARCHAR},
       </if>
-      <if test="dicId != null">
-        dic_id = #{dicId,jdbcType=VARCHAR},
+      <if test="headerId != null">
+        header_id = #{headerId,jdbcType=VARCHAR},
       </if>
-      <if test="dicName != null">
-        dic_name = #{dicName,jdbcType=VARCHAR},
+      <if test="secHeaderId != null">
+        sec_header_id = #{secHeaderId,jdbcType=VARCHAR},
       </if>
       <if test="isSum != null">
         is_sum = #{isSum,jdbcType=VARCHAR},
-      </if>
-      <if test="colName != null">
-        col_name = #{colName,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
@@ -107,10 +97,9 @@
   <update id="updateByPrimaryKey" parameterType="com.dwl.rep.pojo.ReportDetail">
     update report_detail
     set rep_id = #{repId,jdbcType=VARCHAR},
-      dic_id = #{dicId,jdbcType=VARCHAR},
-      dic_name = #{dicName,jdbcType=VARCHAR},
+      header_id = #{headerId,jdbcType=VARCHAR},
+      sec_header_id = #{secHeaderId,jdbcType=VARCHAR},
       is_sum = #{isSum,jdbcType=VARCHAR},
-      col_name = #{colName,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

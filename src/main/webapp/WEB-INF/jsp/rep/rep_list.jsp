@@ -38,9 +38,7 @@
 				   <td>${rep.repName }</td>
 				   <td>${rep.isCache }</td>
 				   <td>${rep.updateTime }</td>
-				   <td>${rep.repId }</td>
-				   
-				   
+				   <td><a href="${ctx }/rep/generateTemplate?repId=${rep.repId }">生成模板</a></td>
 				</tr>
 			</c:forEach>	
 			</tbody>
