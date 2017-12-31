@@ -113,7 +113,7 @@
 								</#list>
 				           </#if>
 			  	  </#list>
-    		    <tr>
+    		    </tr>
     		 </#list>
     	</#if>
     <#else>
