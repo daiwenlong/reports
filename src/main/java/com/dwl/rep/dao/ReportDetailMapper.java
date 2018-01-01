@@ -14,4 +14,8 @@ public interface ReportDetailMapper {
     int updateByPrimaryKeySelective(ReportDetail record);
 
     int updateByPrimaryKey(ReportDetail record);
+    
+    int deleteByRepId(String repId);
+    
+    
 }

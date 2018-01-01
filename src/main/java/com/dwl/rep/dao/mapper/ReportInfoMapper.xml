@@ -6,6 +6,7 @@
     <result column="rep_name" jdbcType="VARCHAR" property="repName" />
     <result column="templet" jdbcType="VARCHAR" property="templet" />
     <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="data_id" jdbcType="VARCHAR" property="dataId" />
     <result column="is_cache" jdbcType="VARCHAR" property="isCache" />
     <result column="corn_time" jdbcType="VARCHAR" property="cornTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -19,7 +20,7 @@
     </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    rep_id, rep_name, templet, result, is_cache, corn_time, update_time
+    rep_id, rep_name, templet, result, data_id,is_cache, corn_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -42,10 +43,10 @@
   </delete>
   <insert id="insert" parameterType="com.dwl.rep.pojo.ReportInfo">
     insert into report_info (rep_id, rep_name, templet, 
-      result, is_cache, corn_time, 
+      result, data_id,is_cache, corn_time, 
       update_time)
     values (#{repId,jdbcType=VARCHAR}, #{repName,jdbcType=VARCHAR}, #{templet,jdbcType=VARCHAR}, 
-      #{result,jdbcType=VARCHAR}, #{isCache,jdbcType=VARCHAR}, #{cornTime,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{dataId,jdbcType=VARCHAR},#{isCache,jdbcType=VARCHAR}, #{cornTime,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.dwl.rep.pojo.ReportInfo">
@@ -62,6 +63,9 @@
       </if>
       <if test="result != null">
         result,
+      </if>
+      <if test="dataId != null">
+        data_id,
       </if>
       <if test="isCache != null">
         is_cache,
@@ -86,6 +90,9 @@
       <if test="result != null">
         #{result,jdbcType=VARCHAR},
       </if>
+      <if test="dataId != null">
+        #{dataId,jdbcType=VARCHAR},
+      </if>
       <if test="isCache != null">
         #{isCache,jdbcType=VARCHAR},
       </if>
@@ -109,6 +116,9 @@
       <if test="result != null">
         result = #{result,jdbcType=VARCHAR},
       </if>
+       <if test="dataId != null">
+        data_id = #{dataId,jdbcType=VARCHAR},
+      </if>
       <if test="isCache != null">
         is_cache = #{isCache,jdbcType=VARCHAR},
       </if>
@@ -126,6 +136,7 @@
     set rep_name = #{repName,jdbcType=VARCHAR},
       templet = #{templet,jdbcType=VARCHAR},
       result = #{result,jdbcType=VARCHAR},
+      data_id = #{dataId,jdbcType=VARCHAR},
       is_cache = #{isCache,jdbcType=VARCHAR},
       corn_time = #{cornTime,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

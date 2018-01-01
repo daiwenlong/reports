@@ -20,4 +20,8 @@ public interface DataInfoMapper {
     int updateByPrimaryKey(DataInfo record);
     
     List<DataInfo> selectInfoList();
+    
+    List<DataInfo> selectInfoListWithDb();
+    
+    
 }

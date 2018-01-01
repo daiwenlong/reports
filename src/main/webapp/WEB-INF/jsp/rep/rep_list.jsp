@@ -17,16 +17,16 @@
 	</h3>
 </div><!-- /.page-header -->
 <div class="col-md-12 mar-b-10" align="right">
-	<a href="${ctx }/rep/toRepEdit" class="btn btn-success ">添加</a>
+	<a href="${ctx }/rep/toEditRep" class="btn btn-success ">添加</a>
 </div>
 <div class="col-md-12">
 	 <form id="pageForm" action="${ctx }/rep/getInfoList" method="post">
 		<table  class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th  width="10%">编号</th>
+					<th  width="5%">编号</th>
 					<th  width="25%">名称</th>
-					<th  width="25%">是否缓存</th>
+					<th  width="15%">是否缓存</th>
 					<th  width="25%">更新时间</th>
 					<th  width="25%">操作</th>
 				</tr>
@@ -37,8 +37,12 @@
 				   <td>${rep.repId }</td>
 				   <td>${rep.repName }</td>
 				   <td>${rep.isCache }</td>
-				   <td>${rep.updateTime }</td>
-				   <td><a href="${ctx }/rep/generateTemplate?repId=${rep.repId }">生成模板</a></td>
+				   <td><fmt:formatDate value="${rep.updateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+				   <td>
+				   	<a href="${ctx }/rep/toEditRep?repId=${rep.repId }">编辑</a>
+				   	<a href="${ctx }/rep/generateTemplate?repId=${rep.repId }" target="_blank">生成模板</a>
+				   	<a href="javascript:void(0)" onclick="deleteRep('${rep.repId }')">删除</a>
+				   </td>
 				</tr>
 			</c:forEach>	
 			</tbody>
@@ -49,5 +53,16 @@
 </div>
 </div>
 <jsp:include page="/common/foot.jsp"/>
+<script type="text/javascript">
+function deleteRep(id){
+	if(confirm("确定删除吗？")){
+		$.post("${ctx}/rep/deleteRepInfo",{repId:id},function(data){
+			alert(data);
+			window.location.reload();
+		})
+		
+	}
+}
+</script>
 </body>
 </html>

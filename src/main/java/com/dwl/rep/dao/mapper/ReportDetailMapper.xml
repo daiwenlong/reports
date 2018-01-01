@@ -22,6 +22,10 @@
     delete from report_detail
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+  <delete id="deleteByRepId" parameterType="java.lang.String">
+    delete from report_detail
+    where rep_id = #{repId,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" parameterType="com.dwl.rep.pojo.ReportDetail">
     insert into report_detail (id, rep_id, header_id, 
       sec_header_id, is_sum, type

@@ -124,13 +124,6 @@ function save(){
 	$("#dataForm").submit();
 }
 
-$(document).ready(function(){
-	$("#dbId").ajaxselect({
-		url:"${ctx}/data/getDbJson",
-		value:'${dataInfo.dbId}'
-	});
-});
-
 function deleteItem(id){
 	if(confirm("确定删除吗？")){
 		$("#item"+id).remove();

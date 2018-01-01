@@ -32,9 +32,14 @@
     select 
     d.* ,b.* from data_info d,db_info b where d.db_id = b.id and d.data_id = #{id,jdbcType=VARCHAR}
   </select>
-   <select id="selectInfoList" parameterType="java.lang.String" resultMap="BaseResultMap">
+   <select id="selectInfoListWithDb" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     d.* ,b.* from data_info d,db_info b where d.db_id = b.id
+  </select>
+  <select id="selectInfoList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from data_info
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from data_info

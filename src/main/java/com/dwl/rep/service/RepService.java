@@ -1,6 +1,7 @@
 package com.dwl.rep.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.dwl.rep.common.Strings;
 import com.dwl.rep.dao.HeaderInfoMapper;
+import com.dwl.rep.dao.ReportDetailMapper;
 import com.dwl.rep.dao.ReportInfoMapper;
 import com.dwl.rep.pojo.ReportInfo;
 
@@ -16,6 +18,9 @@ public class RepService {
 	
 	@Resource
 	private ReportInfoMapper repMapper;
+	
+	@Resource
+	private ReportDetailMapper reportDetailMapper;
 	
 	@Resource
 	private HeaderInfoMapper headerInfoMapper;
@@ -53,11 +58,36 @@ public class RepService {
 				info.setSecHeaderInfo(headerInfoMapper.selectWithDetailByPrimaryKey(info.getSecHeaderId()));		
 			}
 		});
+		reportInfo.init();
 		return reportInfo;
 	}
 	
 	
 	public int updateRepInfo(ReportInfo reportInfo){
+		reportDetailMapper.deleteByRepId(reportInfo.getRepId());
+		reportInfo.getDetails().forEach(info->{
+			if(!Strings.isEmpty(info.getHeaderId())){
+				info.setId(UUID.randomUUID().toString());
+				info.setRepId(reportInfo.getRepId());
+				reportDetailMapper.insert(info);
+			}
+		});
 		return repMapper.updateByPrimaryKey(reportInfo);
+	}
+	
+	public int insertRepInfo(ReportInfo reportInfo){
+		reportInfo.getDetails().forEach(info->{
+			if(!Strings.isEmpty(info.getHeaderId())){
+				info.setId(UUID.randomUUID().toString());
+				info.setRepId(reportInfo.getRepId());
+				reportDetailMapper.insert(info);
+			}
+		});
+		return repMapper.insert(reportInfo);
+	}
+	
+	public int deleteRepInfo(String repId){
+		reportDetailMapper.deleteByRepId(repId);
+		return repMapper.deleteByPrimaryKey(repId);
 	}
 }

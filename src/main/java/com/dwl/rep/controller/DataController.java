@@ -51,7 +51,7 @@ public class DataController {
 	@RequestMapping("/getInfoList")
 	public String getDataList(Model model,HttpServletRequest request){
 		Page<DataInfo> page = ConUtils.setPage(request);
-		dataService.getInfoList();
+		dataService.getInfoListWithDb();
 		PageInfo<DataInfo> pageInfo = page.toPageInfo();
 		model.addAttribute("pageInfo", pageInfo);
 		return "data/info_list";

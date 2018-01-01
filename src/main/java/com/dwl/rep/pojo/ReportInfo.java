@@ -1,7 +1,13 @@
 package com.dwl.rep.pojo;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.alibaba.fastjson.JSON;
+import com.dwl.rep.common.Strings;
 
 public class ReportInfo {
     private String repId;
@@ -11,6 +17,8 @@ public class ReportInfo {
     private String templet;
 
     private String result;
+    
+    private String dataId;
 
     private String isCache;
 
@@ -23,6 +31,18 @@ public class ReportInfo {
     private String hasSecHead2;
     
     private List<ReportDetail> details;
+    
+    private String dataList;
+    
+    public void init(){
+    	Map<String, String> data = new HashMap<>();
+    	String[] array = Strings.splitIgnoreBlank(dataId);
+    	for(String item:array){
+    		data.put(item, "1");
+    	}
+    	this.dataList = JSON.toJSONString(data);
+    	
+    }
 
     public List<ReportDetail> getDetails() {
 		return details;
@@ -30,6 +50,15 @@ public class ReportInfo {
 
 	public void setDetails(List<ReportDetail> details) {
 		this.details = details;
+	}
+	
+
+	public String getDataList() {
+		return dataList;
+	}
+
+	public void setDataList(String dataList) {
+		this.dataList = dataList;
 	}
 
 	public String getRepId() {
@@ -102,6 +131,14 @@ public class ReportInfo {
 
 	public void setHasSecHead2(String hasSecHead2) {
 		this.hasSecHead2 = hasSecHead2;
+	}
+
+	public String getDataId() {
+		return dataId;
+	}
+
+	public void setDataId(String dataId) {
+		this.dataId = dataId;
 	}
 
     

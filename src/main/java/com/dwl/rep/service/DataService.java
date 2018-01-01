@@ -28,6 +28,10 @@ public class DataService {
 		return dataInfoMapper.selectInfoList();
 	}
 	
+	public List<DataInfo> getInfoListWithDb(){
+		return dataInfoMapper.selectInfoListWithDb();
+	}
+	
 	public int saveData(DataInfo dataInfo) {
 		return dataInfoMapper.insert(dataInfo);
 	}

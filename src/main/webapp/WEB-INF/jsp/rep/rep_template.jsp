@@ -19,11 +19,11 @@ vertical-align: middle!important;
 <div class="row">
 <div class="page-header">
 	<h3>
-		模板
+		${reportInfo.repName }
 	</h3>
 </div><!-- /.page-header -->
 <div class="col-md-12 mar-t-10">
-	 ${html }
+	 ${reportInfo.templet }
 </div>
 </div>
 </div>

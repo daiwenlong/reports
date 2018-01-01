@@ -27,7 +27,9 @@ public class NumService {
 			if (null == numInfo) {
 				numInfo = new NumInfo();
 				numInfo.setNumId(id);				
-				numInfo.setNumNow(0);			
+				numInfo.setNumNow(0);
+				numInfo.setNumLen(4);
+				numInfo.setNumPre(id);
 				numInfoMapper.insert(numInfo);
 			}
 			numInfo.setNumNow(numInfo.getNumNow()+1);
