@@ -4,10 +4,18 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.dwl.rep.pojo.ReportDetail;
 import com.dwl.rep.pojo.ReportInfo;
 
@@ -63,6 +71,34 @@ public class FreeMarker {
 		data.put("hasSec1", reportInfo.getHasSecHead1());
 		data.put("hasSec2", reportInfo.getHasSecHead2());
 		return data;
+		
+	}
+	
+	
+	/**
+	 * 填充数据
+	 * @param html
+	 * @param data
+	 * @return
+	 */
+	public static String setData(String html,JSONArray data){
+		Document doc = Jsoup.parseBodyFragment(html);
+		Element body = doc.body();
+		Elements tds = body.getElementsByAttribute("type");
+		for(Element td : tds){
+			String keyId = td.attr("id");
+			String[] keys = Strings.splitIgnoreBlank(keyId);
+			int value = 0;
+			for(String key:keys){
+				for (Iterator<?> iterator = data.iterator(); iterator.hasNext();){
+					 JSONObject jsonObject = (JSONObject) iterator.next();
+					 if(jsonObject.containsKey(key))
+						 value+=jsonObject.getIntValue("value");
+				}
+			}
+			td.html(value+"");
+		}
+		return doc.toString();
 		
 	}
 		
