@@ -9,7 +9,7 @@
          </#if>
     <#else>
         <#if hasSec2 == "1">
-        	 <td rowspan="2"></td>
+        	 <td colspan="2"></td>
         <#else>
               <td></td>
          </#if>
