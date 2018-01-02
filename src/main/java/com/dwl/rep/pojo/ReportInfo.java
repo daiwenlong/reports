@@ -1,6 +1,5 @@
 package com.dwl.rep.pojo;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +31,8 @@ public class ReportInfo {
     
     private List<ReportDetail> details;
     
+    private List<Object> data;
+    
     private String dataList;
     
     public void init(){
@@ -43,8 +44,19 @@ public class ReportInfo {
     	this.dataList = JSON.toJSONString(data);
     	
     }
+    
+    
+    public List<Object> getData() {
+		return data;
+	}
 
-    public List<ReportDetail> getDetails() {
+
+	public void setData(List<Object> data) {
+		this.data = data;
+	}
+
+
+	public List<ReportDetail> getDetails() {
 		return details;
 	}
 

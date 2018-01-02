@@ -93,6 +93,19 @@ public class RepController {
 	}
 	
 	/**
+	 * 查看
+	 * @param repId
+	 * @return
+	 */
+	@RequestMapping("/toViewRep")
+	public String toViewRep(String repId,Model model){
+		ReportInfo reportInfo = repService.getInfoWithDataById(repId);
+		FreeMarker.setData(reportInfo.getTemplet(), reportInfo.getData());
+		model.addAttribute("reportInfo", reportInfo);
+		return "rep/rep_data";
+	}
+	
+	/**
 	 * 获取所有数据项
 	 * @return json
 	 */

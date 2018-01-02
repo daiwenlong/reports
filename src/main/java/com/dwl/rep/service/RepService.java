@@ -1,13 +1,18 @@
 package com.dwl.rep.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.dwl.rep.common.Strings;
+import com.dwl.rep.dao.DataInfoMapper;
 import com.dwl.rep.dao.HeaderInfoMapper;
 import com.dwl.rep.dao.ReportDetailMapper;
 import com.dwl.rep.dao.ReportInfoMapper;
@@ -25,12 +30,27 @@ public class RepService {
 	@Resource
 	private HeaderInfoMapper headerInfoMapper;
 	
+	@Resource
+	private DataInfoMapper dataInfoMapper;
+	
 	public List<ReportInfo> getRepList(){
 		return repMapper.getInfoList();
 	}
 	
 	public ReportInfo getInfoById(String repId){
 		return repMapper.selectByPrimaryKey(repId);
+	}
+	
+	public ReportInfo getInfoWithDataById(String repId){
+		ReportInfo reportInfo = repMapper.selectByPrimaryKey(repId);
+		String[] dataId = Strings.splitIgnoreBlank(reportInfo.getDataId());
+		List<Object> list = new ArrayList<>();
+		for(String id :dataId){
+			List<Object> map = JSONArray.parseArray(dataInfoMapper.selectByPrimaryKey(id).getResult());
+			list.addAll(map);
+		}
+		reportInfo.setData(list);
+		return reportInfo;
 	}
 	
 	public ReportInfo getInfoWithDeal(String repId){

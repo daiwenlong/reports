@@ -81,7 +81,7 @@ public class FreeMarker {
 	 * @param data
 	 * @return
 	 */
-	public static String setData(String html,JSONArray data){
+	public static String setData(String html,List<Object> data){
 		Document doc = Jsoup.parseBodyFragment(html);
 		Element body = doc.body();
 		Elements tds = body.getElementsByAttribute("type");
@@ -89,11 +89,18 @@ public class FreeMarker {
 			String keyId = td.attr("id");
 			String[] keys = Strings.splitIgnoreBlank(keyId);
 			int value = 0;
-			for(String key:keys){
-				for (Iterator<?> iterator = data.iterator(); iterator.hasNext();){
-					 JSONObject jsonObject = (JSONObject) iterator.next();
-					 if(jsonObject.containsKey(key))
-						 value+=jsonObject.getIntValue("value");
+			for(int i = 0;i<data.size();i++){
+				JSONObject obj = (JSONObject) data.get(i);
+				boolean isValue = true;
+				for(String key:keys){
+					String[] kv = Strings.splitIgnoreBlank(key,"#");
+					if(kv[1]!=obj.getString(kv[0])){
+						isValue = false;
+						break;
+					}
+				}
+				if(isValue){
+					value+=obj.getIntValue("value");
 				}
 			}
 			td.html(value+"");
