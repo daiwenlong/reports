@@ -39,8 +39,9 @@
 				   <td>${rep.isCache }</td>
 				   <td><fmt:formatDate value="${rep.updateTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 				   <td>
+				   	<a href="${ctx }/rep/toViewRep?repId=${rep.repId }" target="_blank">查看</a>
 				   	<a href="${ctx }/rep/toEditRep?repId=${rep.repId }">编辑</a>
-				   	<a href="${ctx }/rep/generateTemplate?repId=${rep.repId }" target="_blank">生成模板</a>
+				   	<a href="${ctx }/rep/generateTemplate?repId=${rep.repId }" target="_blank">查看模板</a>
 				   	<a href="javascript:void(0)" onclick="deleteRep('${rep.repId }')">删除</a>
 				   </td>
 				</tr>

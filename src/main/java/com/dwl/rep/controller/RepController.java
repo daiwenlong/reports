@@ -71,9 +71,10 @@ public class RepController {
 	@RequestMapping("/generateTemplate")
 	public String generateTemplate(String repId,Model model) throws IOException, TemplateException{
 		ReportInfo reportInfo = repService.getInfoWithDeal(repId);
-		String html = FreeMarker.MakeHtml(reportInfo);
-		reportInfo.setTemplet(html);
-		repService.updateRepInfo(reportInfo);
+		if(Strings.isEmpty(reportInfo.getTemplet())){
+			reportInfo.setTemplet(FreeMarker.MakeHtml(reportInfo));
+			repService.updateRepInfoOnly(reportInfo);
+		}
 		model.addAttribute("reportInfo", reportInfo);
 		return "rep/rep_template";
 	}
@@ -96,13 +97,22 @@ public class RepController {
 	 * 查看
 	 * @param repId
 	 * @return
+	 * @throws TemplateException 
+	 * @throws IOException 
 	 */
 	@RequestMapping("/toViewRep")
-	public String toViewRep(String repId,Model model){
+	public String toViewRep(String repId,Model model) throws IOException, TemplateException{
 		ReportInfo reportInfo = repService.getInfoWithDataById(repId);
-		FreeMarker.setData(reportInfo.getTemplet(), reportInfo.getData());
+		if(Strings.isEmpty(reportInfo.getResult())){
+			if(Strings.isEmpty(reportInfo.getTemplet())){
+				ReportInfo report = repService.getInfoWithDeal(repId);
+				reportInfo.setTemplet(FreeMarker.MakeHtml(report));
+			}
+			reportInfo.setResult(FreeMarker.setData(reportInfo.getTemplet(), reportInfo.getData()));
+			repService.updateRepInfoOnly(reportInfo);
+		}
 		model.addAttribute("reportInfo", reportInfo);
-		return "rep/rep_data";
+		return "rep/rep_result";
 	}
 	
 	/**

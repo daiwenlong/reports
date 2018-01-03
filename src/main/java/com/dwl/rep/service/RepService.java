@@ -1,6 +1,7 @@
 package com.dwl.rep.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +93,13 @@ public class RepService {
 				reportDetailMapper.insert(info);
 			}
 		});
+		reportInfo.setUpdateTime(new Date());
 		return repMapper.updateByPrimaryKey(reportInfo);
+	}
+	
+	public int updateRepInfoOnly(ReportInfo reportInfo){
+		reportInfo.setUpdateTime(new Date());
+		return repMapper.updateByPrimaryKeySelective(reportInfo);
 	}
 	
 	public int insertRepInfo(ReportInfo reportInfo){

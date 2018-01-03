@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,7 +13,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dwl.rep.pojo.ReportDetail;
 import com.dwl.rep.pojo.ReportInfo;
@@ -94,7 +92,7 @@ public class FreeMarker {
 				boolean isValue = true;
 				for(String key:keys){
 					String[] kv = Strings.splitIgnoreBlank(key,"#");
-					if(kv[1]!=obj.getString(kv[0])){
+					if(!kv[1].equals(obj.getString(kv[0]))){
 						isValue = false;
 						break;
 					}
