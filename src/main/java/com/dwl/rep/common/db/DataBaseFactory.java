@@ -149,17 +149,23 @@ public class DataBaseFactory {
 	 * @param dbInfo
 	 * @throws SQLException
 	 */
-	public void testConnection(DbInfo dbInfo) throws SQLException{
+	public boolean testConnection(DbInfo dbInfo){
 		Connection conn = getConnection(dbInfo);
 		if(conn == null)
-			throw new SQLException();
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery(getDataBase(dbInfo).getLinkSql());
-		if(rs.next())
-			logger.info(getDataBase(dbInfo).getLinkSql() + " ----> " + rs.getString(1));
-		rs.close();
-		stmt.close();
-		conn.close();
+			return false;
+		Statement stmt;
+		try {
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(getDataBase(dbInfo).getLinkSql());
+			if(rs.next())
+				logger.info(getDataBase(dbInfo).getLinkSql() + " ----> " + rs.getString(1));
+			rs.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			return false;
+		}
+		return true;
 		
 	}
 	

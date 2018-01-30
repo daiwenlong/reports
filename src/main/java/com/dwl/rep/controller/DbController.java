@@ -1,7 +1,5 @@
 package com.dwl.rep.controller;
 
-import java.sql.SQLException;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -109,12 +107,10 @@ public class DbController {
 	@ResponseBody
 	public String connDataBase(String dbId){
 		DbInfo dbInfo = dbService.getInfoById(dbId);
-		try {
-			DataBaseFactory.getInstance().testConnection(dbInfo);
+		if(DataBaseFactory.getInstance().testConnection(dbInfo))
 			return "connection success!";
-		} catch (SQLException e) {
+		else
 			return "connection failed";
-		}
 	}
 
 }
