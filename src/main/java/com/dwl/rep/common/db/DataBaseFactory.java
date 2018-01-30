@@ -153,20 +153,34 @@ public class DataBaseFactory {
 		Connection conn = getConnection(dbInfo);
 		if(conn == null)
 			return false;
-		Statement stmt;
+		Statement stmt = null;
+		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(getDataBase(dbInfo).getLinkSql());
+			rs = stmt.executeQuery(getDataBase(dbInfo).getLinkSql());
 			if(rs.next())
 				logger.info(getDataBase(dbInfo).getLinkSql() + " ----> " + rs.getString(1));
-			rs.close();
-			stmt.close();
-			conn.close();
+			return true;
 		} catch (SQLException e) {
 			return false;
+		} finally {
+			if(rs != null){
+				try {rs.close();} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(stmt != null){
+				try {stmt.close();} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(conn != null){
+				try {conn.close();} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
-		return true;
-		
+
 	}
 	
 

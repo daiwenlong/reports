@@ -69,7 +69,7 @@ public class RepController {
 	 * @throws IOException 
 	 */
 	@RequestMapping("/generateTemplate")
-	public String generateTemplate(String repId,Model model) throws IOException, TemplateException{
+	public String generateTemplate(String repId,Model model){
 		ReportInfo reportInfo = repService.getInfoWithDeal(repId);
 		if(Strings.isEmpty(reportInfo.getTemplet())){
 			reportInfo.setTemplet(FreeMarker.MakeHtml(reportInfo));
@@ -101,7 +101,7 @@ public class RepController {
 	 * @throws IOException 
 	 */
 	@RequestMapping("/toViewRep")
-	public String toViewRep(String repId,Model model) throws IOException, TemplateException{
+	public String toViewRep(String repId,Model model){
 		ReportInfo reportInfo = repService.getInfoWithDataById(repId);
 		if(Strings.isEmpty(reportInfo.getResult())){
 			if(Strings.isEmpty(reportInfo.getTemplet())){
