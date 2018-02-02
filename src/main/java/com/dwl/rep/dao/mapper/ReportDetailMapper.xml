@@ -8,9 +8,10 @@
     <result column="sec_header_id" jdbcType="VARCHAR" property="secHeaderId" />
     <result column="is_sum" jdbcType="VARCHAR" property="isSum" />
     <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="orders" jdbcType="INTEGER" property="orders" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, rep_id, header_id, sec_header_id, is_sum, type
+    id, rep_id, header_id, sec_header_id, is_sum, type, orders
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -28,10 +29,11 @@
   </delete>
   <insert id="insert" parameterType="com.dwl.rep.pojo.ReportDetail">
     insert into report_detail (id, rep_id, header_id, 
-      sec_header_id, is_sum, type
+      sec_header_id, is_sum, type, orders
       )
     values (#{id,jdbcType=VARCHAR}, #{repId,jdbcType=VARCHAR}, #{headerId,jdbcType=VARCHAR}, 
-      #{secHeaderId,jdbcType=VARCHAR}, #{isSum,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+      #{secHeaderId,jdbcType=VARCHAR}, #{isSum,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{orders,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.dwl.rep.pojo.ReportDetail">
@@ -55,6 +57,9 @@
       <if test="type != null">
         type,
       </if>
+      <if test="orders != null">
+        orders,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -74,6 +79,9 @@
       </if>
       <if test="type != null">
         #{type,jdbcType=VARCHAR},
+      </if>
+       <if test="orders != null">
+        #{orders,jdbcType=INTEGER}
       </if>
     </trim>
   </insert>
@@ -95,6 +103,9 @@
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
+       <if test="orders != null">
+        orders = #{orders,jdbcType=INTEGER}
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -104,7 +115,8 @@
       header_id = #{headerId,jdbcType=VARCHAR},
       sec_header_id = #{secHeaderId,jdbcType=VARCHAR},
       is_sum = #{isSum,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR}
+      type = #{type,jdbcType=VARCHAR},
+      orders = #{orders,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

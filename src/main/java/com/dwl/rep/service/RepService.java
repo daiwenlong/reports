@@ -17,6 +17,7 @@ import com.dwl.rep.dao.DataInfoMapper;
 import com.dwl.rep.dao.HeaderInfoMapper;
 import com.dwl.rep.dao.ReportDetailMapper;
 import com.dwl.rep.dao.ReportInfoMapper;
+import com.dwl.rep.pojo.ReportDetail;
 import com.dwl.rep.pojo.ReportInfo;
 
 @Service("repService")
@@ -86,13 +87,15 @@ public class RepService {
 	
 	public int updateRepInfo(ReportInfo reportInfo){
 		reportDetailMapper.deleteByRepId(reportInfo.getRepId());
-		reportInfo.getDetails().forEach(info->{
-			if(!Strings.isEmpty(info.getHeaderId())){
-				info.setId(UUID.randomUUID().toString());
-				info.setRepId(reportInfo.getRepId());
-				reportDetailMapper.insert(info);
+		List<ReportDetail> list = reportInfo.getDetails();
+		for(int i=0;i<list.size();i++){
+			if(!Strings.isEmpty(list.get(i).getHeaderId())){
+				list.get(i).setId(UUID.randomUUID().toString());
+				list.get(i).setRepId(reportInfo.getRepId());
+				list.get(i).setOrders(i);
+				reportDetailMapper.insert(list.get(i));
 			}
-		});
+		}
 		reportInfo.setUpdateTime(new Date());
 		return repMapper.updateByPrimaryKey(reportInfo);
 	}
@@ -103,13 +106,15 @@ public class RepService {
 	}
 	
 	public int insertRepInfo(ReportInfo reportInfo){
-		reportInfo.getDetails().forEach(info->{
-			if(!Strings.isEmpty(info.getHeaderId())){
-				info.setId(UUID.randomUUID().toString());
-				info.setRepId(reportInfo.getRepId());
-				reportDetailMapper.insert(info);
+		List<ReportDetail> list = reportInfo.getDetails();
+		for(int i=0;i<list.size();i++){
+			if(!Strings.isEmpty(list.get(i).getHeaderId())){
+				list.get(i).setId(UUID.randomUUID().toString());
+				list.get(i).setRepId(reportInfo.getRepId());
+				list.get(i).setOrders(i);
+				reportDetailMapper.insert(list.get(i));
 			}
-		});
+		}
 		return repMapper.insert(reportInfo);
 	}
 	

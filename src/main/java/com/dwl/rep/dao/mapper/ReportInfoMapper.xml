@@ -17,6 +17,7 @@
 	    <result column="sec_header_id" jdbcType="VARCHAR" property="secHeaderId" />
 	    <result column="is_sum" jdbcType="VARCHAR" property="isSum" />
 	    <result column="type" jdbcType="VARCHAR" property="type" />
+	    <result column="orders" jdbcType="INTEGER" property="orders" />
     </collection>
   </resultMap>
   <sql id="Base_Column_List">
@@ -35,7 +36,7 @@
   </select>
   <select id="selectWithDetailById" parameterType="java.lang.String" resultMap="BaseResultMap">
     select info.*,detail.* from report_info info ,report_detail detail where info.rep_id =detail.rep_id
-    and info.rep_id = #{repId,jdbcType=VARCHAR}
+    and info.rep_id = #{repId,jdbcType=VARCHAR} order by orders
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from report_info

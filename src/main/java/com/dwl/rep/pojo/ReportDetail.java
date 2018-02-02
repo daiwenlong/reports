@@ -13,6 +13,12 @@ public class ReportDetail {
 
     private String type;
     
+    /**
+     * 顺序
+     */
+    private Integer orders;
+
+    
     private HeaderInfo headerInfo;
     
     private HeaderInfo secHeaderInfo;
@@ -81,4 +87,14 @@ public class ReportDetail {
     public void setType(String type) {
         this.type = type;
     }
+
+	public Integer getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Integer orders) {
+		this.orders = orders;
+	}
+    
+    
 }
