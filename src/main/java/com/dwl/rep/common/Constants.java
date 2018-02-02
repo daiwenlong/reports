@@ -21,6 +21,8 @@ public class Constants {
 	public static final String ID ="id";
 	//数据集分割线
 	public static final String SPLIT_LINE ="#";
+	//合计标志
+	public static final String ALL ="all";
 	
 	
 	

@@ -186,7 +186,7 @@ function addItem(){
 	item.find(".head1").attr("name","details["+row+"].headerId").val("");
 	item.find(".head2").attr("name","details["+row+"].secHeaderId").val("");
 	item.find(".type").attr("name","details["+row+"].type");
-	item.find(".issum").attr("name","details["+row+"].issum");
+	item.find(".issum").attr("name","details["+row+"].isSum");
 	$("#items").append(item);
 	row++;
 }

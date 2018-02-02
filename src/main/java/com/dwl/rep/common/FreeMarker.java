@@ -98,7 +98,10 @@ public class FreeMarker {
 				boolean isValue = true;
 				for(String key:keys){
 					String[] kv = Strings.splitIgnoreBlank(key,Constants.SPLIT_LINE);
-					if(!kv[1].equals(obj.getString(kv[0]))){
+					if(kv[1].equals(obj.getString(kv[0]))||
+							Constants.ALL.equals(kv[1])&&obj.containsKey(kv[0])){
+						
+					}else{
 						isValue = false;
 						break;
 					}
