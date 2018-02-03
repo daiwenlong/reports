@@ -1,11 +1,11 @@
 # reports
 自定义配置报表/ssm
 
-# 目标
+## 目标
 
 将部分报表开发从项目中剥离出来，降低代码耦合度，提高开发效率。
 
-# 使用方法
+## 使用方法
 
 1.配置数据源
 
@@ -30,7 +30,7 @@
 
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table.png)
 
-# 联系方式
+## 联系方式
 
 e-mail:dwl0208@163.com
 
