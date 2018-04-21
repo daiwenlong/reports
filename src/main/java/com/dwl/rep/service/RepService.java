@@ -10,6 +10,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONArray;
 import com.dwl.rep.common.Strings;
@@ -84,7 +85,7 @@ public class RepService {
 		return reportInfo;
 	}
 	
-	
+	@Transactional
 	public int updateRepInfo(ReportInfo reportInfo){
 		reportDetailMapper.deleteByRepId(reportInfo.getRepId());
 		List<ReportDetail> list = reportInfo.getDetails();
@@ -105,6 +106,7 @@ public class RepService {
 		return repMapper.updateByPrimaryKeySelective(reportInfo);
 	}
 	
+	@Transactional
 	public int insertRepInfo(ReportInfo reportInfo){
 		List<ReportDetail> list = reportInfo.getDetails();
 		for(int i=0;i<list.size();i++){
@@ -118,6 +120,7 @@ public class RepService {
 		return repMapper.insert(reportInfo);
 	}
 	
+	@Transactional
 	public int deleteRepInfo(String repId){
 		reportDetailMapper.deleteByRepId(repId);
 		return repMapper.deleteByPrimaryKey(repId);

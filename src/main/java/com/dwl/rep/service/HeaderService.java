@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dwl.rep.common.Strings;
 import com.dwl.rep.dao.HeaderDetailMapper;
@@ -31,6 +32,7 @@ public class HeaderService {
 		return headerInfoMapper.selectInfoList();
 	}
 	
+	@Transactional
 	public int InsertHeader(HeaderInfo headerInfo){
 		List<HeaderDetail> list = headerInfo.getDetails();
 		for(int i=0;i<list.size();i++){
@@ -44,6 +46,7 @@ public class HeaderService {
 		return headerInfoMapper.insert(headerInfo);
 	}
 	
+	@Transactional
 	public int updateHead(HeaderInfo headerInfo){
 		headerDetailMapper.deleteByHeaderId(headerInfo.getHeaderId());
 		List<HeaderDetail> list = headerInfo.getDetails();
@@ -59,6 +62,7 @@ public class HeaderService {
 		
 	}
 	
+	@Transactional
 	public int deleteHeader(String headerId){
 		headerDetailMapper.deleteByHeaderId(headerId);
 		return headerInfoMapper.deleteByPrimaryKey(headerId);
