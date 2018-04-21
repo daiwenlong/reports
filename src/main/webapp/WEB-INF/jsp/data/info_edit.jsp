@@ -49,7 +49,7 @@
 <div class="col-md-12">
 <div class="col-md-12 mar-t-10">
 	<div class="alert alert-block alert-success">
-		提示：
+		提示：sql需符合select column1,column2,count(*) as value group by column1,column2 形式。
 	</div>
 </div>
 

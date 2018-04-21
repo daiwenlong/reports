@@ -13,20 +13,24 @@
 
 （注意：除MySQL外，其他数据库类型需自行添加依赖）
 
-### 2.配置表头
-
-![image](https://github.com/daiwenlong/reports/blob/master/doc/images/head.png)
-
-### 3.配置数据项
+### 2.配置数据项
 
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/data.png)
 
-### 4.配置报表
+### 3.数据预览
+
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/dataview.png)
+
+### 4.配置表头
+
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/head.png)
+
+### 5.配置报表
 
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/report.png)
 （注意：至少配置一个横表头和一个竖表头）
 
-### 5.效果
+### 6.效果
 
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table.png)
 

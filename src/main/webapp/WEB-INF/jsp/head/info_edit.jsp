@@ -87,7 +87,7 @@
 <div class="col-md-12">
 <div class="col-md-12 mar-t-10">
 	<div class="alert alert-block alert-success">
-		提示：
+		提示：（表头代码填写sql中group by的字段，子项代码填写子项名称对应的值，如性别代码（xbdm）1:男，2:女。）
 	</div>
 </div>
 
