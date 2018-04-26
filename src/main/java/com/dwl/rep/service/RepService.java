@@ -125,4 +125,9 @@ public class RepService {
 		reportDetailMapper.deleteByRepId(repId);
 		return repMapper.deleteByPrimaryKey(repId);
 	}
+	
+	
+	public List<ReportInfo> getCacheRepInfo(){
+		return repMapper.selectCacheRepInfo();
+	}
 }

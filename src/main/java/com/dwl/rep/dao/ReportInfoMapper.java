@@ -20,4 +20,6 @@ public interface ReportInfoMapper {
     int updateByPrimaryKey(ReportInfo record);
     
     List<ReportInfo> getInfoList();
+    
+    List<ReportInfo> selectCacheRepInfo();
 }
