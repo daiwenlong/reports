@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dwl.rep.dao.ChartInfoMapper">
+  <resultMap id="BaseResultMap" type="com.dwl.rep.pojo.ChartInfo">
+    <id column="chart_id" jdbcType="VARCHAR" property="chartId" />
+    <result column="chart_name" jdbcType="VARCHAR" property="chartName" />
+    <result column="chart_type" jdbcType="VARCHAR" property="chartType" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="is_cache" jdbcType="VARCHAR" property="isCache" />
+    <result column="corn_time" jdbcType="VARCHAR" property="cornTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="data_id" jdbcType="VARCHAR" property="dataId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    chart_id, chart_name, chart_type, result, is_cache, corn_time, update_time, data_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chart_info
+    where chart_id = #{chartId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from chart_info
+    where chart_id = #{chartId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dwl.rep.pojo.ChartInfo">
+    insert into chart_info (chart_id, chart_name, chart_type, 
+      result, is_cache, corn_time, 
+      update_time, data_id)
+    values (#{chartId,jdbcType=VARCHAR}, #{chartName,jdbcType=VARCHAR}, #{chartType,jdbcType=VARCHAR}, 
+      #{result,jdbcType=VARCHAR}, #{isCache,jdbcType=VARCHAR}, #{cornTime,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{dataId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dwl.rep.pojo.ChartInfo">
+    insert into chart_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chartId != null">
+        chart_id,
+      </if>
+      <if test="chartName != null">
+        chart_name,
+      </if>
+      <if test="chartType != null">
+        chart_type,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="isCache != null">
+        is_cache,
+      </if>
+      <if test="cornTime != null">
+        corn_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="dataId != null">
+        data_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chartId != null">
+        #{chartId,jdbcType=VARCHAR},
+      </if>
+      <if test="chartName != null">
+        #{chartName,jdbcType=VARCHAR},
+      </if>
+      <if test="chartType != null">
+        #{chartType,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="isCache != null">
+        #{isCache,jdbcType=VARCHAR},
+      </if>
+      <if test="cornTime != null">
+        #{cornTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataId != null">
+        #{dataId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dwl.rep.pojo.ChartInfo">
+    update chart_info
+    <set>
+      <if test="chartName != null">
+        chart_name = #{chartName,jdbcType=VARCHAR},
+      </if>
+      <if test="chartType != null">
+        chart_type = #{chartType,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="isCache != null">
+        is_cache = #{isCache,jdbcType=VARCHAR},
+      </if>
+      <if test="cornTime != null">
+        corn_time = #{cornTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataId != null">
+        data_id = #{dataId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where chart_id = #{chartId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dwl.rep.pojo.ChartInfo">
+    update chart_info
+    set chart_name = #{chartName,jdbcType=VARCHAR},
+      chart_type = #{chartType,jdbcType=VARCHAR},
+      result = #{result,jdbcType=VARCHAR},
+      is_cache = #{isCache,jdbcType=VARCHAR},
+      corn_time = #{cornTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      data_id = #{dataId,jdbcType=VARCHAR}
+    where chart_id = #{chartId,jdbcType=VARCHAR}
+  </update>
+</mapper>
