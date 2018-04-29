@@ -8,7 +8,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.dwl.rep.pojo.ChartInfo;
 import com.dwl.rep.pojo.ReportInfo;
+import com.dwl.rep.service.ChartService;
 import com.dwl.rep.service.RepService;
 
 /**
@@ -23,6 +25,9 @@ public class JobsInitializingBean implements InitializingBean {
 	
 	@Autowired
 	private RepService repService;
+	
+	@Autowired
+	private ChartService chartService;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -37,6 +42,19 @@ public class JobsInitializingBean implements InitializingBean {
 					logger.info(info.getRepName()+"：开始定时任务");
 				}else{
 					logger.warn(info.getRepName()+"：corn表达式不合法");
+				}
+			});
+		}
+		//获取需要定时更新的图表
+		List<ChartInfo> chartInfos = chartService.getChartCacheList();
+		if(null != chartInfos){
+			chartInfos.forEach(chart->{
+				if(CronExpression.isValidExpression(chart.getCornTime())){
+					QuartzManager.removeJob(chart.getChartId());
+					QuartzManager.addJob(chart.getChartId(), ChartJobs.class,chart.getCornTime());
+					logger.info(chart.getChartName()+"：开始定时任务");
+				}else{
+					logger.warn(chart.getChartName()+"：corn表达式不合法");
 				}
 			});
 		}

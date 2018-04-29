@@ -8,21 +8,50 @@ import java.util.Date;
  *
  */
 public class ChartInfo {
+    /**
+     * 主键
+     */
     private String chartId;
 
+    /**
+     * 图表名称
+     */
     private String chartName;
 
+    /**
+     * 图表类型
+     */
     private String chartType;
 
+    /**
+     * 结果集
+     */
     private String result;
 
+    /**
+     * 是否缓存
+     */
     private String isCache;
 
+    /**
+     * corn表达式
+     */
     private String cornTime;
 
+    /**
+     * 更新时间
+     */
     private Date updateTime;
 
+    /**
+     * 数据项id
+     */
     private String dataId;
+    
+    /**
+     * 数据项
+     */
+    private DataInfo dataInfo;
 
     public String getChartId() {
         return chartId;
@@ -87,4 +116,14 @@ public class ChartInfo {
     public void setDataId(String dataId) {
         this.dataId = dataId;
     }
+
+	public DataInfo getDataInfo() {
+		return dataInfo;
+	}
+
+	public void setDataInfo(DataInfo dataInfo) {
+		this.dataInfo = dataInfo;
+	}
+    
+    
 }

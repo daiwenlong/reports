@@ -1,5 +1,7 @@
 package com.dwl.rep.dao;
 
+import java.util.List;
+
 import com.dwl.rep.pojo.ChartInfo;
 
 public interface ChartInfoMapper {
@@ -14,4 +16,9 @@ public interface ChartInfoMapper {
     int updateByPrimaryKeySelective(ChartInfo record);
 
     int updateByPrimaryKey(ChartInfo record);
+    
+    List<ChartInfo> selectList();
+    
+    List<ChartInfo> selectCacheList();
+    
 }

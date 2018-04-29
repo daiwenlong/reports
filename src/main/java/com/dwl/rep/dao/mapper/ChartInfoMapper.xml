@@ -20,6 +20,17 @@
     from chart_info
     where chart_id = #{chartId,jdbcType=VARCHAR}
   </select>
+  <select id="selectList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chart_info
+  </select>
+  <select id="selectCacheList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chart_info
+    where is_cache = '1'
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from chart_info
     where chart_id = #{chartId,jdbcType=VARCHAR}
