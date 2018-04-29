@@ -17,10 +17,6 @@
 
 <div class="col-md-12 mar-t-10 text-center chart" style="width: 100%;height:400px;" id="${info.chartId}"> </div>
 
-<div class="col-md-12 mar-t-10 text-center chart" style="width: 100%;height:400px;" id="CT0002"> </div>
-
-<div class="col-md-12 mar-t-10 text-center chart" style="width: 100%;height:400px;" id="CT0003"> </div>
-
 </div>
 </div>
 <jsp:include page="/common/foot.jsp"/>
