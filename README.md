@@ -19,7 +19,7 @@
 
 ### 3.数据预览
 
-![image](https://github.com/daiwenlong/reports/blob/master/doc/images/dataview.png)
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/view.png)
 
 ### 4.配置表头
 
@@ -30,9 +30,26 @@
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/report.png)
 （注意：至少配置一个横表头和一个竖表头）
 
-### 6.效果
+### 6.报表效果
 
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table.png)
+
+### 7.配置图表
+
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/chart.png)
+(可选择三种基本图表：柱状图，折线图，饼状图)
+
+### 8.页面配置
+
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/page.png)
+(定义适量长宽的div，class中添加chart;div的id为图表的编号；引入图中的js)
+
+### 9.图表预览
+
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/bar.png)
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/line.png)
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/pie.png)
+(更多设置请直接使用百度开源图表ECharts)
 
 ## 联系方式
 
