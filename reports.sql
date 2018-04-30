@@ -285,6 +285,8 @@ CREATE TABLE `chart_info` (
   PRIMARY KEY (`chart_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
 -- ----------------------------
 -- Records of chart_info
 -- ----------------------------
