@@ -38,6 +38,20 @@
 		    </select>
 		</div>
 	</div>
+	<div class="form-group col-md-6">
+		<label class="control-label" style="float:left"><h4> 是否缓存：</h4> </label>
+
+		<div class="col-xs-8">
+			<select id="isCache" name="isCache" class="form-control" style="width:100%;"></select>
+		</div>
+	</div>
+	<div class="form-group col-md-6">
+		<label class="control-label" style="float:left"><h4> corn表达式：</h4></label>
+
+		<div class="col-sm-6">
+			<input type="text" id="cornTime" name="cornTime" value="${reportInfo.cornTime }" class="form-control" style="width:100%;"/>
+		</div>
+	</div>
 	
 </div>
 <div class="col-md-12 mar-t-10">
@@ -135,7 +149,7 @@
 <div class="col-md-12">
 <div class="col-md-12 mar-t-10">
 	<div class="alert alert-block alert-success">
-		提示：
+		提示：（至少配置一个横表头和一个纵表头。）
 	</div>
 </div>
 
@@ -159,6 +173,10 @@ $(document).ready(function(){
 	if(row == 0){
 		row++;
 	}
+	$("#isCache").select({
+		dic:{"0":"否","1":"是"},
+		value:'${reportInfo.isCache}'
+	});
 	var dataId = '${reportInfo.dataList}';
 	$("#dataId").ajaxselectmore({
 		url:"${ctx}/rep/getAllData",
@@ -170,7 +188,15 @@ $(document).ready(function(){
 });
 
 function save(){
-	$("#dataForm").submit();
+	if($("#isCache").val()=='1'){
+		$.post("${ctx}/chart/check",{corn:$("#cornTime").val()},function(data){
+			if(!data){
+				alert("corn表达式不合法");
+			}else{
+				$("#dataForm").submit();
+			}
+		});
+	}
 }
 
 function deleteItem(id){

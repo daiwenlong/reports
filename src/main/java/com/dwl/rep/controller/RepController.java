@@ -17,6 +17,8 @@ import com.alibaba.fastjson.JSON;
 import com.dwl.rep.common.ConUtils;
 import com.dwl.rep.common.FreeMarker;
 import com.dwl.rep.common.Strings;
+import com.dwl.rep.common.quartz.QuartzManager;
+import com.dwl.rep.common.quartz.RepJobs;
 import com.dwl.rep.pojo.DataInfo;
 import com.dwl.rep.pojo.HeaderInfo;
 import com.dwl.rep.pojo.ReportInfo;
@@ -158,7 +160,13 @@ public class RepController {
 		}else{
 			reportInfo.setRepId(numService.getNum("RT"));
 			repService.insertRepInfo(reportInfo);
-		}	
+		}
+		if("1".equals(reportInfo.getIsCache())){
+			QuartzManager.removeJob(reportInfo.getRepId());
+			QuartzManager.addJob(reportInfo.getRepId(), RepJobs.class, reportInfo.getCornTime());
+		}else{
+			QuartzManager.removeJob(reportInfo.getRepId());
+		}
 		return "redirect:/rep/getInfoList";
 	}
 	
