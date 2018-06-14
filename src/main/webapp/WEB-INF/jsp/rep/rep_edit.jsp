@@ -196,6 +196,8 @@ function save(){
 				$("#dataForm").submit();
 			}
 		});
+	}else{
+		$("#dataForm").submit();
 	}
 }
 
