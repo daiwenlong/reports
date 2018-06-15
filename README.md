@@ -47,6 +47,10 @@
 #### 示例5
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table4.png)
 
+#### 示例6
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table5.png)
+
+
 ### 7.配置图表
 
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/chart.png)
