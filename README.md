@@ -32,7 +32,20 @@
 
 ### 6.报表效果
 
+#### 示例1
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table.png)
+
+#### 示例2
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table1.png)
+
+#### 示例3
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table2.png)
+
+#### 示例4
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table3.png)
+
+#### 示例5
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table4.png)
 
 ### 7.配置图表
 
