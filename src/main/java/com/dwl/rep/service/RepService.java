@@ -2,13 +2,14 @@ package com.dwl.rep.service;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +45,7 @@ public class RepService {
 		return repMapper.selectByPrimaryKey(repId);
 	}
 	
+	@Cacheable(value="myCache",key="#repId")
 	public ReportInfo getInfoWithDataById(String repId){
 		ReportInfo reportInfo = repMapper.selectByPrimaryKey(repId);
 		String[] dataId = Strings.splitIgnoreBlank(reportInfo.getDataId());
@@ -101,6 +103,7 @@ public class RepService {
 		return repMapper.updateByPrimaryKey(reportInfo);
 	}
 	
+	@CachePut(value="myCache",key="#reportInfo.repId")
 	public int updateRepInfoOnly(ReportInfo reportInfo){
 		reportInfo.setUpdateTime(new Date());
 		return repMapper.updateByPrimaryKeySelective(reportInfo);
@@ -121,6 +124,7 @@ public class RepService {
 	}
 	
 	@Transactional
+	@CacheEvict(value="myCache",key="#repId")
 	public int deleteRepInfo(String repId){
 		reportDetailMapper.deleteByRepId(repId);
 		return repMapper.deleteByPrimaryKey(repId);

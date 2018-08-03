@@ -1,7 +1,12 @@
 package com.dwl.rep.pojo;
 
-public class ReportDetail {
-    private String id;
+import java.io.Serializable;
+
+public class ReportDetail implements Serializable{
+   
+	private static final long serialVersionUID = 1L;
+
+	private String id;
 
     private String repId;
 

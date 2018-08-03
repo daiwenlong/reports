@@ -1,5 +1,6 @@
 package com.dwl.rep.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,8 +8,13 @@ import java.util.Date;
  * @author dwl
  *
  */
-public class ChartInfo {
+public class ChartInfo implements Serializable{
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 主键
      */
     private String chartId;

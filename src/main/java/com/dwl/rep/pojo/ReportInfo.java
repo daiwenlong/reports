@@ -1,5 +1,6 @@
 package com.dwl.rep.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -8,8 +9,11 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.dwl.rep.common.Strings;
 
-public class ReportInfo {
-    private String repId;
+public class ReportInfo implements Serializable{
+    
+	private static final long serialVersionUID = 1L;
+
+	private String repId;
 
     private String repName;
 

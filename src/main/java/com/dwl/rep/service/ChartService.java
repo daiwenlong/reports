@@ -8,6 +8,9 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
@@ -36,19 +39,23 @@ public class ChartService {
 		return chartInfoMapper.selectCacheList();
 	}
 	
+	@Cacheable(value="myCache",key="#id")
 	public ChartInfo getChartById(String id) {
 		return chartInfoMapper.selectByPrimaryKey(id);
 	}
 	
+	@CachePut(value="myCache",key="#chartInfo.chartId")
 	public int addChartInfo(ChartInfo chartInfo){
 		chartInfo.setUpdateTime(new Date());
 		return chartInfoMapper.insertSelective(chartInfo);
 	}
 	
+	@CacheEvict(value="myCache",key="#id")
 	public int deleteChartInfo(String id){
 		return chartInfoMapper.deleteByPrimaryKey(id);
 	}
 	
+	@CachePut(value="myCache",key="#chartInfo.chartId")
 	public int updateChartInfo(ChartInfo chartInfo){
 		chartInfo.setUpdateTime(new Date());
 		return chartInfoMapper.updateByPrimaryKeySelective(chartInfo);

@@ -1,5 +1,6 @@
 package com.dwl.rep.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,8 +8,13 @@ import java.util.List;
  * @author dwl
  *
  */
-public class HeaderInfo {
+public class HeaderInfo implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * 主键
      */
     private String headerId;

@@ -81,7 +81,7 @@ public class ChartController {
 			chartService.updateChartInfo(info);
 		}
 		if("1".equals(info.getIsCache())){//加入定时任务
-			QuartzManager.removeJob(info.getChartName());
+			QuartzManager.removeJob(info.getChartId());
 			QuartzManager.addJob(info.getChartId(), ChartJobs.class,info.getCornTime());
 		}else{
 			QuartzManager.removeJob(info.getChartName());
