@@ -29,16 +29,7 @@ public class RepJobs implements Job {
 	 */
 	public void cacheRep(String repId){
 		RepService repService = BeanUtil.getBean("repService");
-		ReportInfo info = repService.getInfoWithDataById(repId);
-		//模板未生成
-		if(Strings.isEmpty(info.getTemplet())){
-			ReportInfo report = repService.getInfoWithDeal(repId);
-			info.setTemplet(FreeMarker.MakeHtml(report));
-			repService.updateRepInfoOnly(info);
-		}
-		info.setResult(FreeMarker.setData(info.getTemplet(), info.getData()));
-		repService.updateRepInfoOnly(info);
-		
+		repService.updateCache(repId);
 	}
 
 }

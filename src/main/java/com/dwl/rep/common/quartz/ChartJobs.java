@@ -21,9 +21,7 @@ public class ChartJobs implements Job {
 	
 	public void cacheChart(String chartId){
 		ChartService chartService = BeanUtil.getBean("chartService");
-		ChartInfo info = chartService.getChartById(chartId);
-		info.setResult(chartService.getChartResultById(chartId));
-		chartService.updateChartInfo(info);
+		chartService.updateCache(chartId);
 	}
 
 }
