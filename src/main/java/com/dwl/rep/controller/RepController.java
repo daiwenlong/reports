@@ -105,14 +105,6 @@ public class RepController {
 	@RequestMapping("/toViewRep")
 	public String toViewRep(String repId,Model model){
 		ReportInfo reportInfo = repService.getInfoWithDataById(repId);
-		if(Strings.isEmpty(reportInfo.getResult())){
-			if(Strings.isEmpty(reportInfo.getTemplet())){
-				ReportInfo report = repService.getInfoWithDeal(repId);
-				reportInfo.setTemplet(FreeMarker.MakeHtml(report));
-			}
-			reportInfo.setResult(FreeMarker.setData(reportInfo.getTemplet(), reportInfo.getData()));
-			repService.updateRepInfoOnly(reportInfo);
-		}
 		model.addAttribute("reportInfo", reportInfo);
 		return "rep/rep_result";
 	}

@@ -39,12 +39,11 @@ public class ChartService {
 		return chartInfoMapper.selectCacheList();
 	}
 	
-	@Cacheable(value="myCache",key="#id")
+	@Cacheable(value="myCache",key="#id",unless="#result.isCache == '0'")
 	public ChartInfo getChartById(String id) {
 		return chartInfoMapper.selectByPrimaryKey(id);
 	}
 	
-	@CachePut(value="myCache",key="#chartInfo.chartId")
 	public int addChartInfo(ChartInfo chartInfo){
 		chartInfo.setUpdateTime(new Date());
 		return chartInfoMapper.insertSelective(chartInfo);
@@ -55,7 +54,7 @@ public class ChartService {
 		return chartInfoMapper.deleteByPrimaryKey(id);
 	}
 	
-	@CachePut(value="myCache",key="#chartInfo.chartId")
+	@CacheEvict(value="myCache",key="#chartInfo.chartId")
 	public int updateChartInfo(ChartInfo chartInfo){
 		chartInfo.setUpdateTime(new Date());
 		return chartInfoMapper.updateByPrimaryKeySelective(chartInfo);
@@ -64,9 +63,29 @@ public class ChartService {
 	
 	//页面展示测试
 	public String getChartResultById(String id) {
-		ChartInfo info = chartInfoMapper.selectByPrimaryKey(id);
+		ChartInfo info = this.getChartById(id);
 		if("1".equals(info.getIsCache())&&!Strings.isEmpty(info.getResult()))
 			return info.getResult();
+		return this.getJsonResult(info);
+	}
+	
+	
+	/**
+	 * 定时缓存
+	 * @param id
+	 * @return
+	 */
+	@CachePut(value="myCache",key="#id")
+	public ChartInfo updateCache(String id){
+		ChartInfo info = chartInfoMapper.selectByPrimaryKey(id);
+		info.setResult(this.getJsonResult(info));
+		info.setUpdateTime(new Date());
+		chartInfoMapper.updateByPrimaryKeySelective(info);
+		return info;
+	}
+	
+	
+	public String getJsonResult(ChartInfo info){
 		List<Map<String, Object>> result = SqlEexecuter.getInstance()
 				.getResult(dataInfoMapper.selectWithDbByPrimaryKey(info.getDataId()));
 		Map<String, Object> dataInfo = new HashMap<>();

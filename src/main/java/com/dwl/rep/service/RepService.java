@@ -13,12 +13,17 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.dwl.rep.common.Constants;
+import com.dwl.rep.common.FreeMarker;
+import com.dwl.rep.common.SqlEexecuter;
 import com.dwl.rep.common.Strings;
 import com.dwl.rep.dao.DataInfoMapper;
 import com.dwl.rep.dao.HeaderInfoMapper;
 import com.dwl.rep.dao.ReportDetailMapper;
 import com.dwl.rep.dao.ReportInfoMapper;
+import com.dwl.rep.pojo.DataInfo;
 import com.dwl.rep.pojo.ReportDetail;
 import com.dwl.rep.pojo.ReportInfo;
 
@@ -45,16 +50,41 @@ public class RepService {
 		return repMapper.selectByPrimaryKey(repId);
 	}
 	
-	@Cacheable(value="myCache",key="#repId")
+	@Cacheable(value="myCache",key="#repId",unless="#result.isCache == '0'")
 	public ReportInfo getInfoWithDataById(String repId){
 		ReportInfo reportInfo = repMapper.selectByPrimaryKey(repId);
 		String[] dataId = Strings.splitIgnoreBlank(reportInfo.getDataId());
 		List<Object> list = new ArrayList<>();
-		for(String id :dataId){
-			List<Object> map = JSONArray.parseArray(dataInfoMapper.selectByPrimaryKey(id).getResult());
-			list.addAll(map);
+		//是否缓存
+		if(Constants.CACHE.equals(reportInfo.getIsCache())&&Strings.isEmpty(reportInfo.getResult())){
+			for(String id :dataId){
+				DataInfo dataInfo = dataInfoMapper.selectWithDbByPrimaryKey(id);
+				if(Strings.isEmpty(dataInfo.getResult()))
+					dataInfo.setResult(JSON.toJSONString(SqlEexecuter.getInstance().getResult(dataInfo)));
+				List<Object> map = JSONArray.parseArray(dataInfo.getResult());
+				list.addAll(map);
+			}
+			reportInfo.setData(list);
+			if(Strings.isEmpty(reportInfo.getTemplet())){
+				ReportInfo report = this.getInfoWithDeal(repId);
+				reportInfo.setTemplet(FreeMarker.MakeHtml(report));
+			}
+			reportInfo.setResult(FreeMarker.setData(reportInfo.getTemplet(), reportInfo.getData()));
+			repMapper.updateByPrimaryKeySelective(reportInfo);
+		}else{
+			for(String id :dataId){
+				DataInfo dataInfo = dataInfoMapper.selectWithDbByPrimaryKey(id);
+				dataInfo.setResult(JSON.toJSONString(SqlEexecuter.getInstance().getResult(dataInfo)));
+				List<Object> map = JSONArray.parseArray(dataInfo.getResult());
+				list.addAll(map);
+			}
+			reportInfo.setData(list);
+			if(Strings.isEmpty(reportInfo.getTemplet())){
+				ReportInfo report = this.getInfoWithDeal(repId);
+				reportInfo.setTemplet(FreeMarker.MakeHtml(report));
+			}
+			reportInfo.setResult(FreeMarker.setData(reportInfo.getTemplet(), reportInfo.getData()));
 		}
-		reportInfo.setData(list);
 		return reportInfo;
 	}
 	
@@ -88,6 +118,7 @@ public class RepService {
 	}
 	
 	@Transactional
+	@CacheEvict(value="myCache",key="#reportInfo.repId")
 	public int updateRepInfo(ReportInfo reportInfo){
 		reportDetailMapper.deleteByRepId(reportInfo.getRepId());
 		List<ReportDetail> list = reportInfo.getDetails();
@@ -103,7 +134,7 @@ public class RepService {
 		return repMapper.updateByPrimaryKey(reportInfo);
 	}
 	
-	@CachePut(value="myCache",key="#reportInfo.repId")
+	
 	public int updateRepInfoOnly(ReportInfo reportInfo){
 		reportInfo.setUpdateTime(new Date());
 		return repMapper.updateByPrimaryKeySelective(reportInfo);
@@ -133,5 +164,32 @@ public class RepService {
 	
 	public List<ReportInfo> getCacheRepInfo(){
 		return repMapper.selectCacheRepInfo();
+	}
+	
+	/**
+	 * 用于定时任务缓存
+	 * @param repId
+	 * @return
+	 */
+	@CachePut(value="myCache",key="#repId")
+	public ReportInfo updateCache(String repId){
+		ReportInfo reportInfo = repMapper.selectByPrimaryKey(repId);
+		String[] dataId = Strings.splitIgnoreBlank(reportInfo.getDataId());
+		List<Object> list = new ArrayList<>();
+		for(String id :dataId){
+			DataInfo dataInfo = dataInfoMapper.selectWithDbByPrimaryKey(id);
+			dataInfo.setResult(JSON.toJSONString(SqlEexecuter.getInstance().getResult(dataInfo)));
+			List<Object> map = JSONArray.parseArray(dataInfo.getResult());
+			list.addAll(map);
+		}
+		reportInfo.setData(list);
+		if(Strings.isEmpty(reportInfo.getTemplet())){
+			ReportInfo report = this.getInfoWithDeal(repId);
+			reportInfo.setTemplet(FreeMarker.MakeHtml(report));
+		}
+		reportInfo.setResult(FreeMarker.setData(reportInfo.getTemplet(), reportInfo.getData()));
+		reportInfo.setUpdateTime(new Date());
+		repMapper.updateByPrimaryKeySelective(reportInfo);
+		return reportInfo;
 	}
 }
