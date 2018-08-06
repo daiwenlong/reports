@@ -4,7 +4,6 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import com.dwl.rep.pojo.ChartInfo;
 import com.dwl.rep.service.ChartService;
 
 /**

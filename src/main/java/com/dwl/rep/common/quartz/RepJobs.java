@@ -3,9 +3,6 @@ package com.dwl.rep.common.quartz;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import com.dwl.rep.common.FreeMarker;
-import com.dwl.rep.common.Strings;
-import com.dwl.rep.pojo.ReportInfo;
 import com.dwl.rep.service.RepService;
 
 /**
