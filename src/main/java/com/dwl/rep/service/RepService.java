@@ -56,7 +56,9 @@ public class RepService {
 		String[] dataId = Strings.splitIgnoreBlank(reportInfo.getDataId());
 		List<Object> list = new ArrayList<>();
 		//是否缓存
-		if(Constants.CACHE.equals(reportInfo.getIsCache())&&Strings.isEmpty(reportInfo.getResult())){
+		if(Constants.CACHE.equals(reportInfo.getIsCache())){
+			if(!Strings.isEmpty(reportInfo.getResult()))
+				return reportInfo;
 			for(String id :dataId){
 				DataInfo dataInfo = dataInfoMapper.selectWithDbByPrimaryKey(id);
 				if(Strings.isEmpty(dataInfo.getResult()))

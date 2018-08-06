@@ -64,7 +64,7 @@ public class ChartService {
 	//页面展示测试
 	public String getChartResultById(String id) {
 		ChartInfo info = this.getChartById(id);
-		if("1".equals(info.getIsCache())&&!Strings.isEmpty(info.getResult()))
+		if(Constants.CACHE.equals(info.getIsCache())&&!Strings.isEmpty(info.getResult()))
 			return info.getResult();
 		return this.getJsonResult(info);
 	}
