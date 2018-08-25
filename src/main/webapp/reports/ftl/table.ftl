@@ -1,4 +1,4 @@
-<table  class="table table-bordered table-striped text-center">
+<table  class="table table-bordered table-striped text-center" id="report">
 <#-- 横表头 -->
  <tr id="first">
     <#if hasSec1 == "1">
