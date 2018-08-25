@@ -50,7 +50,10 @@
 #### 示例6
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table5.png)
 
+#### 导出
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/export.png)
 
+![image](https://github.com/daiwenlong/reports/blob/master/doc/images/execl.png)
 ### 7.配置图表
 
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/chart.png)
