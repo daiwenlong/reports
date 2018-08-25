@@ -50,21 +50,25 @@
 #### 示例6
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/table5.png)
 
-#### 导出
+### 7.报表导出
+
+#### 导出页面
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/export.png)
 
+#### 导出效果
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/execl.png)
-### 7.配置图表
+
+### 8.配置图表
 
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/chart.png)
 (可选择三种基本图表：柱状图，折线图，饼状图)
 
-### 8.页面配置
+### 9.页面配置
 
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/page.png)
 (定义适量长宽的div，class中添加chart;div的id为图表的编号；引入图中的js)
 
-### 9.图表预览
+### 10.图表预览
 
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/bar.png)
 ![image](https://github.com/daiwenlong/reports/blob/master/doc/images/line.png)
