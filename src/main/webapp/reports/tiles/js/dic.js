@@ -109,3 +109,44 @@ function dicvalue(items,dic){
 		});
 	}
 };
+
+$.fn.linkselect = function(options) {
+	var select = this;//获取当前select对象
+	var url = options.url;//获取数据的链接
+	var value = options.value;//初始化需要选中的数据
+	var now = options.now;//当前select的级别
+	var param = options.param;//传向后台的参数
+	var level = options.level;//一共有多少级select
+	var preid = options.preid;//当前select的id的前缀
+	$.get(url[now],{param:param},function(result){
+		select.find("option").remove();
+		select.append("<option value=''>请选择</option>");
+		for(key in result){
+			if(key == value[now]){
+				select.append("<option value='"+key+"' selected>"+result[key]+"</option>");
+			}else{
+				select.append("<option value='"+key+"'>"+result[key]+"</option>");
+			}
+		}
+		//onchange事件，改变后面select的值
+		select.change(function(){
+			var thisId = select.attr("id").split("_")
+			var param = select.val();
+			var nextId = parseInt(thisId[1])+1;
+			if(nextId <= level){
+				var next = $("#"+preid+"_"+nextId);
+				next.find("option").remove();
+				$("#"+preid+"_"+nextId).linkselect({
+					url:url,
+					value:value,
+					level:level,
+					now:nextId,
+					param:param,
+					preid:preid
+				});
+				next.change();
+			}
+		});
+		select.change();
+	});
+};
